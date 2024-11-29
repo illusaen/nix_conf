@@ -5,6 +5,7 @@
   lib,
   config,
   pkgs,
+  vars,
   ...
 }: 
 
@@ -16,7 +17,7 @@
   ];
 
   wsl.enable = true;
-  wsl.defaultUser = "dev";
+  wsl.defaultUser = vars.username;
   wsl.nativeSystemd = true;
 
   networking.hostName = "wsl-nixos";
@@ -40,7 +41,7 @@
   system.stateVersion = "24.05";
 
   users.users = {
-    dev = {
+    "${vars.username}" = {
       isNormalUser = true;
       extraGroups = ["wheel"];
     };

@@ -5,6 +5,7 @@
   lib,
   config,
   pkgs,
+  vars,
   ...
 }: {
   # You can import other home-manager modules here
@@ -27,8 +28,8 @@
   };
 
   home = {
-    username = "dev";
-    homeDirectory = "/home/dev";
+    username = vars.username;
+    homeDirectory = vars.home;
   };
 
   home.sessionVariables = {
@@ -52,7 +53,7 @@
     enable = true;
 
     shellAbbrs = {
-      hcn = "$EDITOR ~/nix_conf/home-manager/home.nix";
+      hcn = "$EDITOR ${vars.nix_conf}/home-manager/home.nix";
       gd = "git diff";
       gco = "git checkout";
       gcl = "git clone";
@@ -63,18 +64,11 @@
       l = "eza";
       ll = "eza -al";
       lt = "eza --tree --git-ignore --all";
-      ncn = "$EDITOR ~/nix_conf/nixos/configuration.nix";
+      ncn = "$EDITOR ${vars.nix_conf}/nixos/configuration.nix";
       ncg = "nix-collect-garbage";
     };
 
     functions = {
-      hrn = ''
-          set -l current_directory (pwd)
-          cd ~/nix_conf
-          home-manager switch --flake .#dev@wsl-nixos
-          cd $current_directory
-      '';
-
       nrn = ''
         set -l current_directory (pwd)
         cd ~/nix_conf
@@ -92,9 +86,9 @@
     };
     
     plugins = with pkgs.fishPlugins; [
-      { name = "fishplugin-fzf-unstable"; src = pkgs.fishPlugins.fzf.src; }
-      { name = "fishplugin-colored-man-pages-unstable"; src = pkgs.fishPlugins.colored-man-pages.src; }
-      { name = "fishplugin-async-prompt"; src = pkgs.fishPlugins.async-prompt; }
+      { name = "fishplugin-fzf-unstable"; src = fzf.src; }
+      { name = "fishplugin-colored-man-pages-unstable"; src = colored-man-pages.src; }
+      { name = "fishplugin-async-prompt"; src = async-prompt; }
     ];
   };
 
@@ -118,12 +112,14 @@
     };
   };
 
-  home.file = {
-    ".config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix_conf/home-manager/starship.toml";
-    ".config/helix/config.toml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix_conf/home-manager/helix-config.toml";
-    ".config/helix/languages.toml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix_conf/home-manager/helix-languages.toml";
-    ".config/fish/conf.d/autols.fish".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix_conf/home-manager/autols.fish";
-    #".config/fish/conf.d/fzf.fish".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix_conf/home-manager/fzf.fish";
+  home.file = let
+    symlink = config.lib.file.mkOutOfStoreSymlink;
+    hm_modules = "${vars.nix_conf}/home-manager/modules"; 
+  in {
+    ".config/starship.toml".source = symlink "${hm_modules}/starship/starship.toml";
+    ".config/helix/config.toml".source = symlink "${hm_modules}/helix/helix-config.toml";
+    ".config/helix/languages.toml".source = symlink "${hm_modules}/helix/helix-languages.toml";
+    ".config/fish/conf.d/autols.fish".source = symlink "${hm_modules}/fish/autols.fish";
   };
 
   # Nicely reload system units when changing configs
