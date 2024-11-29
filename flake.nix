@@ -2,10 +2,13 @@
   description = "Home Manager configuration for dev";
 
   inputs = {
-    # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
 
-    # Home manager
+    NixOS-WSL = {
+      url = "github:nix-community/NixOS-WSL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -13,6 +16,7 @@
   outputs = {
     self,
     nixpkgs,
+    NixOS-WSL,
     home-manager,
     ...
   } @ inputs: let
@@ -24,7 +28,11 @@
       wsl-nixos = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         # > Our main nixos configuration file <
-        modules = [./nixos/configuration.nix];
+        modules = [
+          { nix.registry.nixpkgs.flake = nixpkgs; }
+          ./nixos/configuration.nix
+          NixOS-WSL.nixosModules.wsl
+        ];
       };
     };
 

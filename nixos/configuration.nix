@@ -6,17 +6,20 @@
   config,
   pkgs,
   ...
-}: {
+}: 
+
+{
   # You can import other NixOS modules here
   imports = [
-    #<nixos-wsl/modules>
-    /etc/nixos/configuration.nix
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
   ];
 
   wsl.enable = true;
   wsl.defaultUser = "dev";
+  wsl.nativeSystemd = true;
+
+  networking.hostName = "wsl-nixos";
 
   nixpkgs.config.allowUnfree = true;
 
@@ -26,9 +29,15 @@
     settings = {
       experimental-features = "nix-command flakes";
     };
+    package = pkgs.nixFlakes;
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 30d";
+    };
   };
 
-  networking.hostName = "wsl-nixos";
+  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+  system.stateVersion = "24.05";
 
   users.users = {
     dev = {
@@ -52,15 +61,5 @@
   '';
   };
 
-  programs.fish = {
-    enable = true;
-    vendor = {
-      config.enable = true;
-      functions.enable = true;
-      completions.enable = true;
-    };
-  };
-  
-  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "24.05";
+  programs.fish.enable = true;
 }
