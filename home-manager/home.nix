@@ -37,7 +37,7 @@
     FZF_PREVIEW_DIR_CMD = "eza --all --color=always";
   };
   
-  home.packages = with pkgs; [ helix fish git bat eza fzf zoxide starship ];
+  home.packages = with pkgs; [ bat eza fzf zoxide starship ];
 
   programs.home-manager.enable = true;
 

@@ -1,18 +1,13 @@
-# This is your system's configuration file.
-# Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 {
   inputs,
   lib,
-  config,
   pkgs,
   vars,
   ...
 }: 
 
 {
-  # You can import other NixOS modules here
   imports = [
-    # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
   ];
 
@@ -33,12 +28,15 @@
     package = pkgs.nixFlakes;
     gc = {
       automatic = true;
-      options = "--delete-older-than 30d";
+      options = "--delete-older-than 7d";
     };
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "24.05";
+
+  environment.systemPackages = with pkgs; [ git fish helix ];
+  environment.variables.EDITOR = "hx";
 
   users.users = {
     "${vars.username}" = {
