@@ -24,17 +24,9 @@
     flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
   in {
     settings = {
-      # Enable flakes and new 'nix' command
       experimental-features = "nix-command flakes";
     };
-    # Opinionated: disable channels
-    #channel.enable = false;
-
-    # Opinionated: make flake registry and nix path match flake inputs
-    #registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
-    #nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
   };
-
 
   networking.hostName = "wsl-nixos";
 
@@ -46,17 +38,23 @@
   };
 
   programs.bash = {
-    interactiveShellInit = ''
-      if [[_$(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" &&
-        -z ''${BASH_EXECUTION_STRING} ]]
-      then
-        shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
-        exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
-      fi
-    '';
-  };
+  interactiveShellInit = ''
+    if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
+    then
+      shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
+      exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+    fi
+  '';
+};
 
-  programs.fish.enable = true;
+  programs.fish = {
+    enable = true;
+    vendor = {
+      config.enable = true;
+      functions.enable = true;
+      completions.enable = true;
+    };
+  };
   
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "24.05";
