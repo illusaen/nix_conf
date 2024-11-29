@@ -30,7 +30,6 @@
 
   home.sessionVariables = {
     EDITOR = "hx";
-    FZF_PREVIEW_DIR_CMD = "eza --all --color=always";
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

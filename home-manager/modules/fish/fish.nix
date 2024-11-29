@@ -2,6 +2,9 @@
 
 {
   home.packages = [ pkgs.fzf ];
+  home.sessionVariables = {
+    FZF_PREVIEW_DIR_CMD = "eza --all --color=always";
+  };
 
   programs.fish = {
     enable = true;
