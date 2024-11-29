@@ -1,31 +1,27 @@
-# This is your home-manager configuration file
-# Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{
-  inputs,
-  lib,
-  config,
-  pkgs,
-  vars,
-  ...
-}: {
-  # You can import other home-manager modules here
-  imports = [
-    # If you want to use home-manager modules from other flakes (such as nix-colors):
-    # inputs.nix-colors.homeManagerModule
+{ inputs, config, vars, ... }: 
 
-    # You can also split up your configuration and import pieces of it here:
-    # ./nvim.nix
+{
+  _module.args.vars = vars;
+  imports = [
+    ./modules/helix/helix.nix
+    ./modules/fish/fish.nix
+    ./modules/starship/starship.nix
+    ./modules/bat.nix
+    ./modules/eza.nix
+    ./modules/git.nix
+    ./modules/zoxide.nix
   ];
 
   nixpkgs = {
-    # Configure your nixpkgs instance
     config = {
-      # Disable if you don't want unfree packages
       allowUnfree = true;
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = _: true;
     };
   };
+
+  # Nicely reload system units when changing configs
+  systemd.user.startServices = "sd-switch";
 
   home = {
     username = vars.username;
@@ -36,95 +32,9 @@
     EDITOR = "hx";
     FZF_PREVIEW_DIR_CMD = "eza --all --color=always";
   };
-  
-  home.packages = with pkgs; [ bat eza fzf zoxide starship ];
-
-  programs.home-manager.enable = true;
-
-  programs.zoxide = {
-    enable = true;
-    enableFishIntegration = true;
-    options = [ "--cmd j" ];
-  };
-
-  programs.fzf.enable = true;
-  
-  programs.fish = {
-    enable = true;
-
-    shellAbbrs = {
-      hcn = "$EDITOR ${vars.nix_conf}/home-manager/home.nix";
-      gd = "git diff";
-      gco = "git checkout";
-      gcl = "git clone";
-      gst = "git status";
-      gga = { setCursor = true; function = "git_add_commit_push"; };
-      ggcl = { setCursor = true; function = "git_clone_own_repo"; };
-      cat = "bat";
-      l = "eza";
-      ll = "eza -al";
-      lt = "eza --tree --git-ignore --all";
-      ncn = "$EDITOR ${vars.nix_conf}/nixos/configuration.nix";
-      ncg = "nix-collect-garbage";
-    };
-
-    functions = {
-      nrn = ''
-        set -l current_directory (pwd)
-        cd ~/nix_conf
-        sudo nixos-rebuild switch --flake .#wsl-nixos --impure
-        cd $current_directory
-      '';
-
-      git_add_commit_push = ''
-          echo 'git add .;git commit -m "%";git push'
-      '';
-
-      git_clone_own_repo = ''
-          echo "git clone git@github.com:illusaen/%.git"
-      '';
-    };
-    
-    plugins = with pkgs.fishPlugins; [
-      { name = "fishplugin-fzf-unstable"; src = fzf.src; }
-      { name = "fishplugin-colored-man-pages-unstable"; src = colored-man-pages.src; }
-      { name = "fishplugin-async-prompt"; src = async-prompt; }
-    ];
-  };
-
-  programs.starship = {
-    enable = true;
-    enableFishIntegration = true;
-  };
-  
-  programs.helix = {
-    enable = true;
-    defaultEditor = true;
-  };
-  
-  programs.git = {
-    enable = true;
-    userName = "Wendy Chen";
-    userEmail = "jaewchen@gmail.com";
-    extraConfig = {
-      init.defaultBranch = "main";
-      push.autoSetupRemote = true;
-    };
-  };
-
-  home.file = let
-    symlink = config.lib.file.mkOutOfStoreSymlink;
-    hm_modules = "${vars.nix_conf}/home-manager/modules"; 
-  in {
-    ".config/starship.toml".source = symlink "${hm_modules}/starship/starship.toml";
-    ".config/helix/config.toml".source = symlink "${hm_modules}/helix/helix-config.toml";
-    ".config/helix/languages.toml".source = symlink "${hm_modules}/helix/helix-languages.toml";
-    ".config/fish/conf.d/autols.fish".source = symlink "${hm_modules}/fish/autols.fish";
-  };
-
-  # Nicely reload system units when changing configs
-  systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "24.05";
+
+  programs.home-manager.enable = true;
 }
