@@ -52,7 +52,7 @@
     enable = true;
 
     shellAbbrs = {
-      hmconfig = "$EDITOR ~/nix_conf/home-manager/home.nix";
+      hcn = "$EDITOR ~/nix_conf/home-manager/home.nix";
       gd = "git diff";
       gco = "git checkout";
       gcl = "git clone";
@@ -63,19 +63,19 @@
       l = "eza";
       ll = "eza -al";
       lt = "eza --tree --git-ignore --all";
-      nrn = "sudo nixos-rebuild switch --flake .#wsl-nixos";
+      ncn = "$EDITOR ~/nix_conf/nixos/configuration.nix";
       ncg = "nix-collect-garbage";
     };
 
     functions = {
-      hmreload = ''
+      hrn = ''
           set -l current_directory (pwd)
           cd ~/nix_conf
           home-manager switch --flake .#dev@wsl-nixos
           cd $current_directory
       '';
 
-      nixreload = ''
+      nrn = ''
         set -l current_directory (pwd)
         cd ~/nix_conf
         sudo nixos-rebuild switch --flake .#wsl-nixos --impure

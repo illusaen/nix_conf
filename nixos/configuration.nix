@@ -37,6 +37,11 @@
     };
   };
 
+  programs.nix-ld = {
+    enable = true;
+    package = pkgs.nix-ld-rs; # only for NixOS 24.05
+  };
+
   programs.bash = {
   interactiveShellInit = ''
     if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
@@ -45,7 +50,7 @@
       exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
     fi
   '';
-};
+  };
 
   programs.fish = {
     enable = true;
