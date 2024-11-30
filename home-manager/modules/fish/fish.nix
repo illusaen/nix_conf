@@ -1,9 +1,8 @@
 { pkgs, vars, ... }:
 
 {
-  home.packages = [ pkgs.fzf ];
   home.sessionVariables = {
-    FZF_PREVIEW_DIR_CMD = "eza --all --color=always";
+    fzf_preview_dir_cmd = "eza --all --color=always";
   };
 
   programs.fish = {
@@ -42,14 +41,12 @@
       '';
     };
     
-    plugins = with pkgs.fishPlugins; [
-      { name = "fishplugin-fzf-unstable"; src = fzf.src; }
-      { name = "fishplugin-colored-man-pages-unstable"; src = colored-man-pages.src; }
-      { name = "fishplugin-async-prompt"; src = async-prompt; }
+    plugins = [
+      { name = "fishplugin-fzf.fish"; src = pkgs.fishPlugins.fzf-fish.src; }
+      { name = "fishplugin-colored-man-pages-unstable"; src = pkgs.fishPlugins.colored-man-pages.src; }
+      { name = "fishplugin-async-prompt"; src = pkgs.fishPlugins.async-prompt; }
     ];
   };
-
-  programs.fzf.enable = true;
 
   xdg.configFile."fish/conf.d/autols.fish".source = ./autols.fish;
 }
