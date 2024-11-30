@@ -11,6 +11,9 @@
     ./modules/git.nix
     ./modules/zoxide.nix
     ./modules/fzf.nix
+    ./modules/direnv.nix
+    ./modules/fd.nix
+    ./modules/vscode.nix
   ];
 
   nixpkgs = {

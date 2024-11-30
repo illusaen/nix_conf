@@ -35,7 +35,7 @@
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "24.05";
 
-  environment.systemPackages = with pkgs; [ git fish helix ];
+  environment.systemPackages = with pkgs; [ git wget fish helix ];
   environment.variables.EDITOR = "hx";
 
   users.users = {
