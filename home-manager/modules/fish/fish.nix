@@ -30,6 +30,7 @@
       lt = "eza --tree --git-ignore --all";
       ncn = "$EDITOR ${vars.nix_conf}/nixos/configuration.nix";
       ncg = "nix-collect-garbage";
+      devnode = "nix flake init --template github:illusaen/nix_conf#node";
     };
 
     functions = {
