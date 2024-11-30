@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:cachix/devenv-nixpkgs/rolling";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     systems.url = "github:nix-systems/default";
     devenv.url = "github:cachix/devenv";
     devenv.inputs.nixpkgs.follows = "nixpkgs";
@@ -11,14 +11,7 @@
     extra-substituters = "https://devenv.cachix.org";
   };
 
-  outputs =
-    {
-      self,
-      nixpkgs,
-      devenv,
-      systems,
-      ...
-    }@inputs:
+  outputs = { self, nixpkgs, devenv, systems, ... } @ inputs:
     let
       forEachSystem = nixpkgs.lib.genAttrs (import systems);
     in
@@ -28,25 +21,28 @@
         devenv-test = self.devShells.${system}.default.config.test;
       });
 
-      devShells = forEachSystem (
-        system:
-        let
-          pkgs = nixpkgs.legacyPackages.${system};
-        in
-        {
-          default = devenv.lib.mkShell {
-            inherit inputs pkgs;
-            modules = [
-              {
-                languages.javascript = {
-                  enable = true;
-                  pnpm.enable = true;
-                };
-                languages.typescript.enable = true;
-              }
-            ];
-          };
-        }
-      );
+      devShells = forEachSystem
+        (system:
+          let
+            pkgs = nixpkgs.legacyPackages.${system};
+          in
+          {
+            default = devenv.lib.mkShell {
+              inherit inputs pkgs;
+              modules = [
+                {
+                  languages.javascript = {
+                    enable = true;
+                    package = pkgs.nodejs-slim_22;
+                    pnpm = {
+                      enable = true;
+                      install.enable = true;
+                    };
+                  };
+                  languages.typescript.enable = true;
+                }
+              ];
+            };
+          });
     };
 }
