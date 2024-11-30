@@ -1,10 +1,4 @@
-{
-  inputs,
-  lib,
-  pkgs,
-  vars,
-  ...
-}:
+{ pkgs, vars, ... }:
 
 {
   imports = [ ./hardware-configuration.nix ];
@@ -17,24 +11,20 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  nix =
-    let
-      flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-    in
-    {
-      settings = {
-        experimental-features = "nix-command flakes";
-        trusted-users = [
-          "root"
-          "@wheel"
-        ];
-      };
-      package = pkgs.nixFlakes;
-      gc = {
-        automatic = true;
-        options = "--delete-older-than 7d";
-      };
+  nix = {
+    settings = {
+      experimental-features = "nix-command flakes";
+      trusted-users = [
+        "root"
+        "@wheel"
+      ];
     };
+    package = pkgs.nixFlakes;
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 7d";
+    };
+  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "24.05";
@@ -56,7 +46,7 @@
 
   programs.nix-ld = {
     enable = true;
-    package = pkgs.nix-ld-rs; # only for NixOS 24.05
+    package = pkgs.nix-ld-rs; # only for NixOS 24.05, for vscode
   };
 
   programs.bash = {

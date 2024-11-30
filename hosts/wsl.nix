@@ -1,6 +1,4 @@
 {
-  inputs,
-  outputs,
   nixpkgs,
   NixOS-WSL,
   home-manager,
@@ -11,7 +9,7 @@
 {
   wsl-nixos = nixpkgs.lib.nixosSystem {
     specialArgs = {
-      inherit inputs outputs vars;
+      inherit vars;
     };
     modules = [
       { nix.registry.nixpkgs.flake = nixpkgs; }
@@ -23,7 +21,7 @@
         home-manager.useUserPackages = true;
         home-manager.users."${vars.username}" = import ../home-manager/home.nix;
         home-manager.extraSpecialArgs = {
-          inherit inputs outputs vars;
+          inherit vars;
         };
       }
     ];

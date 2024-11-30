@@ -1,9 +1,4 @@
-{
-  inputs,
-  config,
-  vars,
-  ...
-}:
+{ vars, ... }:
 
 {
   _module.args.vars = vars;
