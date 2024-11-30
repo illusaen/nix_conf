@@ -70,7 +70,7 @@
         }
       );
 
-      templates = {
+      templates = rec {
         node = {
           path = ./templates/node;
           description = "JS/TS with PNPM using devenv";
