@@ -10,6 +10,7 @@
     ./modules/eza.nix
     ./modules/git.nix
     ./modules/zoxide.nix
+    ./modules/fzf.nix
   ];
 
   nixpkgs = {
