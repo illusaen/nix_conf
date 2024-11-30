@@ -9,7 +9,7 @@
     enable = true;
 
     shellAbbrs = {
-      hcn = "$EDITOR ${vars.nix_conf}/home-manager/home.nix";
+      hcn = "$EDITOR ${vars.nix_conf}/home-manager/modules/fish/fish.nix";
       gd = "git diff";
       gco = "git checkout";
       gcl = "git clone";
@@ -30,7 +30,7 @@
       lt = "eza --tree --git-ignore --all";
       ncn = "$EDITOR ${vars.nix_conf}/nixos/configuration.nix";
       ncg = "nix-collect-garbage";
-      devnode = "nix flake init --template github:illusaen/nix_conf#node";
+      devnode = "nix flake init --template 'github:illusaen/nix_conf/*#node'";
     };
 
     functions = {

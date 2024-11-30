@@ -69,5 +69,12 @@
             ;
         }
       );
+
+      templates = {
+        node = {
+          path = ./templates/node;
+          description = "JS/TS with PNPM using devenv";
+        };
+      };
     };
 }
