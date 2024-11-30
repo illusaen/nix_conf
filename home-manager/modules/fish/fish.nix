@@ -14,8 +14,16 @@
       gco = "git checkout";
       gcl = "git clone";
       gst = "git status";
-      gga = { setCursor = true; function = "git_add_commit_push"; };
-      ggcl = { setCursor = true; function = "git_clone_own_repo"; };
+      gl = "git log --ext-diff";
+      gs = "git show --ext-diff";
+      gga = {
+        setCursor = true;
+        function = "git_add_commit_push";
+      };
+      ggcl = {
+        setCursor = true;
+        function = "git_clone_own_repo";
+      };
       cat = "bat";
       l = "eza";
       ll = "eza -al";
@@ -33,18 +41,27 @@
       '';
 
       git_add_commit_push = ''
-          echo 'git add .;git commit -m "%";git push'
+        echo 'git add .;git commit -m "%";git push'
       '';
 
       git_clone_own_repo = ''
-          echo "git clone git@github.com:illusaen/%.git"
+        echo "git clone git@github.com:illusaen/%.git"
       '';
     };
-    
+
     plugins = [
-      { name = "fishplugin-fzf.fish"; src = pkgs.fishPlugins.fzf-fish.src; }
-      { name = "fishplugin-colored-man-pages-unstable"; src = pkgs.fishPlugins.colored-man-pages.src; }
-      { name = "fishplugin-async-prompt"; src = pkgs.fishPlugins.async-prompt; }
+      {
+        name = "fishplugin-fzf.fish";
+        src = pkgs.fishPlugins.fzf-fish.src;
+      }
+      {
+        name = "fishplugin-colored-man-pages-unstable";
+        src = pkgs.fishPlugins.colored-man-pages.src;
+      }
+      {
+        name = "fishplugin-async-prompt";
+        src = pkgs.fishPlugins.async-prompt;
+      }
     ];
   };
 

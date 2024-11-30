@@ -1,9 +1,9 @@
 { pkgs, ... }:
 
 {
-	home.packages = [ pkgs.eza ];
+  home.packages = [ pkgs.eza ];
   programs.eza = {
-  	enable = true;
+    enable = true;
     icons = true;
     git = true;
   };

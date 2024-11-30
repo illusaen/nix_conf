@@ -1,4 +1,9 @@
-{ inputs, config, vars, ... }: 
+{
+  inputs,
+  config,
+  vars,
+  ...
+}:
 
 {
   _module.args.vars = vars;
@@ -12,6 +17,7 @@
     ./modules/zoxide.nix
     ./modules/fzf.nix
     ./modules/direnv.nix
+    ./modules/devenv.nix
     ./modules/fd.nix
   ];
 
