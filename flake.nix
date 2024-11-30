@@ -27,7 +27,6 @@
       ...
     }@inputs:
     let
-      inherit (self) outputs;
       vars = {
         username = "dev";
         home = "/home/${vars.username}";
@@ -63,8 +62,6 @@
       nixosConfigurations = (
         import ./hosts/wsl.nix {
           inherit
-            inputs
-            outputs
             nixpkgs
             NixOS-WSL
             home-manager
