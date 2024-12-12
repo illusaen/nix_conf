@@ -35,30 +35,18 @@
       inherit (self) outputs;
     in
     {
-      darwinConfigurations."${HOST_DARWIN}" = nix-darwin.lib.darwinSystem {
-        modules = [
-          ./hosts/darwin.nix
-          home-manager.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users."${USER}" = import ./home-manager/home.nix;
-            home-manager.extraSpecialArgs = {
-              USER = USER;
-              HOME = HOME_DARWIN;
-            };
-          }
-        ];
-        specialArgs = {
+      darwinConfigurations = (
+        import ./hosts/darwin.nix {
           inherit
-            outputs
+            nix-darwin
             home-manager
+            outputs
             USER
             ;
           HOST = HOST_DARWIN;
           HOME = HOME_DARWIN;
-        };
-      };
+        }
+      );
 
       nixosConfigurations = (
         import ./hosts/wsl.nix {

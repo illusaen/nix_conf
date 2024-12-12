@@ -16,14 +16,11 @@
     modules = [
       { nix.registry.nixpkgs.flake = nixpkgs; }
       nixos-wsl.nixosModules.wsl
-      (
-        { ... }:
-        {
-          wsl.enable = true;
-          wsl.defaultUser = USER;
-          wsl.nativeSystemd = true;
-        }
-      )
+      {
+        wsl.enable = true;
+        wsl.defaultUser = USER;
+        wsl.nativeSystemd = true;
+      }
       ./shared.nix
       home-manager.nixosModules.home-manager
       {
