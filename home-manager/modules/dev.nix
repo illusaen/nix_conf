@@ -1,6 +1,22 @@
 { pkgs, ... }:
 
 {
+  home.packages = with pkgs; [
+    nixd
+    nixfmt-rfc-style
+  ];
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+    config = {
+      hide_env_diff = true;
+      whitelist = {
+        prefix = [ "~/Documents/projects" ];
+      };
+    };
+  };
+
   programs.vscode = {
     enable = true;
     extensions = with pkgs.vscode-extensions; [
@@ -22,6 +38,17 @@
       "editor.minimap.enabled" = false;
       "terminal.integrated.defaultProfile.osx" = "fish";
       "workbench.colorTheme" = "Ayu Mirage";
+    };
+  };
+
+  programs.git = {
+    enable = true;
+    userName = "Wendy Chen";
+    userEmail = "jaewchen@gmail.com";
+    difftastic.enable = true;
+    extraConfig = {
+      init.defaultBranch = "main";
+      push.autoSetupRemote = true;
     };
   };
 }

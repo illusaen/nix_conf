@@ -10,15 +10,8 @@
     ./modules/helix/helix.nix
     ./modules/fish/fish.nix
     ./modules/starship/starship.nix
-    ./modules/bat.nix
-    ./modules/eza.nix
-    ./modules/git.nix
-    ./modules/zoxide.nix
-    ./modules/fzf.nix
-    ./modules/direnv.nix
-    ./modules/fd.nix
-    ./modules/vscode.nix
-    ./modules/nixlang.nix
+    ./modules/dev.nix
+    ./modules/cli.nix
   ];
 
   nixpkgs = {
