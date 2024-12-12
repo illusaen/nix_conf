@@ -5,6 +5,7 @@
   USER,
   HOST,
   HOME,
+  CONFIG_DIR,
   ...
 }:
 
@@ -20,12 +21,16 @@
       ./darwin-1password.nix
       home-manager.darwinModules.home-manager
       {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.users."${USER}" = import ../home-manager/home.nix;
-        home-manager.extraSpecialArgs = { inherit USER HOME; };
+        imports = [ ../home-manager/home.nix ];
       }
     ];
-    specialArgs = { inherit USER HOST HOME; };
+    specialArgs = {
+      inherit
+        USER
+        HOST
+        HOME
+        CONFIG_DIR
+        ;
+    };
   };
 }

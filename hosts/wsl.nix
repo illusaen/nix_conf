@@ -5,13 +5,14 @@
   USER,
   HOST,
   HOME,
+  CONFIG_DIR,
   ...
 }:
 
 {
   "${HOST}" = nixpkgs.lib.nixosSystem {
     specialArgs = {
-      inherit USER;
+      inherit USER HOME CONFIG_DIR;
     };
     modules = [
       { nix.registry.nixpkgs.flake = nixpkgs; }
@@ -24,12 +25,7 @@
       ./shared.nix
       home-manager.nixosModules.home-manager
       {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.users."${USER}" = import ../home-manager/home.nix;
-        home-manager.extraSpecialArgs = {
-          inherit USER HOME;
-        };
+        imports = [ ../home-manager/home.nix ];
       }
     ];
   };

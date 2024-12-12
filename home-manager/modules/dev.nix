@@ -28,6 +28,7 @@
       svelte.svelte-vscode
       teabyii.ayu
       ms-vscode-remote.vscode-remote-extensionpack
+      tamasfe.even-better-toml
     ];
     userSettings = {
       "files.autoSave" = "afterDelay";

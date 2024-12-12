@@ -1,45 +1,17 @@
 {
-  pkgs,
   USER,
   HOME,
+  CONFIG_DIR,
   ...
 }:
-
+let
+  HM_MODULE_DIR = "${HOME}/${CONFIG_DIR}/home-manager/modules";
+in
 {
-  imports = [
-    ./modules/helix/helix.nix
-    ./modules/fish/fish.nix
-    ./modules/starship/starship.nix
-    ./modules/dev.nix
-    ./modules/cli.nix
-    ./modules/wezterm/wezterm.nix
-  ];
-
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-      # Workaround for https://github.com/nix-community/home-manager/issues/2942
-      allowUnfreePredicate = _: true;
-    };
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    users."${USER}" = import ./user.nix;
+    extraSpecialArgs = { inherit USER HOME HM_MODULE_DIR; };
   };
-
-  # Nicely reload system units when changing configs
-  systemd.user.startServices = "sd-switch";
-
-  home = {
-    username = USER;
-    homeDirectory = HOME;
-  };
-
-  home.sessionVariables = {
-    EDITOR = "hx";
-  };
-
-  home.packages = with pkgs; [
-    raycast
-    google-chrome
-  ];
-
-  programs.home-manager.enable = true;
-  home.stateVersion = "24.11";
 }

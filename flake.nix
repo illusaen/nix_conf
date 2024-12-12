@@ -32,6 +32,7 @@
       HOME_WSL = "/home/${USER}";
       HOST_DARWIN = "idunn";
       HOST_WSL = "loki";
+      CONFIG_DIR = "nix_conf";
       inherit (self) outputs;
     in
     {
@@ -42,6 +43,7 @@
             home-manager
             outputs
             USER
+            CONFIG_DIR
             ;
           HOST = HOST_DARWIN;
           HOME = HOME_DARWIN;
@@ -55,6 +57,7 @@
             nixos-wsl
             home-manager
             USER
+            CONFIG_DIR
             ;
           HOST = HOST_WSL;
           HOME = HOME_WSL;

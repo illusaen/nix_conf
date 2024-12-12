@@ -23,19 +23,19 @@ foreground = '#F8F8F2'
 current_line = '#44475A'
 primary = '#1A1F29'
 box = '#44475A'
-blue	= '#80bfff'
-green	= '#d5ff80'
+blue = '#80bfff'
+green = '#d5ff80'
 orange = '#ffd173'
 pink = '#f28779'
 purple = '#dfbfff'
-red	= '#FF5555'
+red = '#FF5555'
 yellow = '#73d0ff'
 
 [directory]
 format = '[─](fg:current_line)[](fg:pink)[󰷏 ](fg:primary bg:pink)[](fg:pink bg:box)[ $read_only$truncation_symbol$path](fg:foreground bg:box)[](fg:box)'
 home_symbol = " ~/"
 truncation_symbol = ' '
-truncation_length = 3
+truncation_length = 2
 read_only = '󱧵 '
 read_only_style = ''
 

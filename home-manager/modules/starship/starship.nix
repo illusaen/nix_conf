@@ -1,10 +1,10 @@
-{ pkgs, ... }:
+{ config, HM_MODULE_DIR, ... }:
 
 {
-  home.packages = [ pkgs.starship ];
   programs.starship = {
     enable = true;
     enableFishIntegration = true;
   };
-  xdg.configFile."starship.toml".source = ./starship.toml;
+  xdg.configFile."starship.toml".source =
+    config.lib.file.mkOutOfStoreSymlink "${HM_MODULE_DIR}/starship/starship.toml";
 }
