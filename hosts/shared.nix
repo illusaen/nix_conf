@@ -23,6 +23,7 @@
     options = "--delete-older-than 7d";
   };
   nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowBroken = true;
 
   networking.hostName = HOST;
   networking.computerName = HOST;
@@ -44,4 +45,7 @@
     '';
   };
   programs.fish.enable = true;
+
+  programs._1password-gui.enable = true;
+  programs._1password.enable = false;
 }

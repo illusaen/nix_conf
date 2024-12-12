@@ -17,6 +17,7 @@
         system.stateVersion = 5;
       }
       ./shared.nix
+      ./darwin-1password.nix
       home-manager.darwinModules.home-manager
       {
         home-manager.useGlobalPkgs = true;
