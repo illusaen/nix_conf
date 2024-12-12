@@ -1,138 +1,86 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 format = """
-[\u256d\u2500](color_bg1)[\ue0b2](color_bg)$directory[\ue0bc](color_bg)\
-$git_branch$git_status\
+[╭](fg:current_line)\
+$directory\
+$git_branch\
+$git_status\
 $fill\
-$username\
-[\ue0ba](fg:color_bg)\
-$c$nodejs$golang$rust$dart$gradle[\uE0b8](color_bg)[\u2500\u256e](color_bg1)\
+$direnv\
+$nodejs\
+$python\
+$c\
+$cmd_duration\
+$time\
 $line_break\
-[\u2570\u2500](color_bg1)$character
+$character\
 """
-right_format = "$container$status$time[\u2500\u256f](color_bg1)"
 
-palette = 'gruvbox_dark'
+palette = 'dracula'
+add_newline = true
 
-[palettes.gruvbox_dark]
-color_bg = '#32302F'
-color_fg0 = '#fbf1c7'
-color_bg1 = '#3c3836'
-color_bg3 = '#665c54'
-color_blue = '#458588'
-color_aqua = '#689d6a'
-color_green = '#98971a'
-color_orange = '#d65d0e'
-color_purple = '#b16286'
-color_red = '#cc241d'
-color_yellow = '#d79921'
-
-[character]
-success_symbol = "[\u2771](bold dimmed blue)"
-error_symbol = "[\u2771](bold dimmed red)"
-
-[status]
-symbol = " "
-not_executable_symbol = '🚫 '
-not_found_symbol = '🔍 '
-sigint_symbol = '🧱 '
-signal_symbol = '⚡ '
-disabled = false
-pipestatus = true
-map_symbol = true
-format = "[\ue0ba](color_bg)[ $symbol$status ]($style)[\ue0bc](color_bg)"
-style = "bold red bg:color_bg"
-pipestatus_format = "[\ue0ba](color_bg)[$pipestatus]($style)[\ue0bc](color_bg)"
-pipestatus_segment_format = "[ $symbol$status ]($style)"
-pipestatus_separator = "[|](dimmed white bg:color_bg)"
-
-[line_break]
-disabled = false
-
-[fill]
-symbol = "\u2500"
-style = "color_bg1"
+[palettes.dracula]
+foreground = '#F8F8F2'
+current_line = '#44475A'
+primary = '#1A1F29'
+box = '#44475A'
+blue	= '#80bfff'
+green	= '#d5ff80'
+orange = '#ffd173'
+pink = '#f28779'
+purple = '#dfbfff'
+red	= '#FF5555'
+yellow = '#73d0ff'
 
 [directory]
-style = "fg:white bg:color_bg"
-format = "[ $path ]($style)"
+format = '[─](fg:current_line)[](fg:pink)[󰷏 ](fg:primary bg:pink)[](fg:pink bg:box)[ $read_only$truncation_symbol$path](fg:foreground bg:box)[](fg:box)'
+home_symbol = " ~/"
+truncation_symbol = ' '
 truncation_length = 3
-truncation_symbol = "…/"
-home_symbol = "  "
-
-[directory.substitutions]
-"  /Documents" = "… /  "
-"  /Downloads" = "… / 󰥦 "
-"  /documents" = "… /  "
-"  /downloads" = "… / 󰥦 "
-"… /  /projects" = "… / 󰙅 "
-"… /  /containers" = "… /  "
-"  /Music" = "… / 󰸪 "
-"  /music" = "… / 󰸪 "
-"  /Pictures" = "… /  "
-"  /pictures" = "… /  "
+read_only = '󱧵 '
+read_only_style = ''
 
 [git_branch]
-symbol = ""
-style = "fg:white bg:color_bg"
-format = "([\ue0ba](fg:color_bg bg:prev_bg)[ $symbol $branch ]($style))"
+format = '[─](fg:current_line)[](fg:green)[$symbol](fg:primary bg:green)[](fg:green bg:box)[ $branch](fg:foreground bg:box)'
+symbol = ' '
 
 [git_status]
-style = "fg:white bg:color_bg"
-format = "([$all_status$ahead_behind ]($style))[\ue0bc](fg:color_bg)"
-untracked = '🤷'
-stashed = '📦 '
-modified = '📝 '
-staged = '[\($count\)](green bg:color_bg)'
-deleted = '🗑 '
-
-[username]
-style_user = "bg:color_bg"
-style_root = "fg:red"
-format = "[\ue0ba](color_bg)[ $user ]($style)[\ue0bc](color_bg)"
-disabled = false
-show_always = false
-
-[hostname]
-ssh_only = false
-detect_env_vars = ['!TMUX', 'SSH_CONNECTION']
-disabled = false
-
-[docker_context]
-symbol = " "
-style = "bg:color_bg"
-format = '[ $symbol $context ]($style)'
-
-[c]
-symbol = " "
-style = "bg:color_bg"
-format = '[ $symbol ($version) ]($style)'
-
-[golang]
-symbol = " "
-style = "bg:color_bg"
-format = '[ $symbol ($version) ]($style)'
-
-[gradle]
-style = "bg:color_bg"
-format = '[ $symbol ($version) ]($style)'
+ignore_submodules = true
+format = '[ $all_status](fg:foreground bg:box)[](fg:box)'
 
 [nodejs]
-symbol = ""
-style = "bg:color_bg"
-format = '[ $symbol($version) ]($style)'
+format = '[─](fg:current_line)[](fg:green)[$symbol](fg:primary bg:green)[](fg:green bg:box)[ $version](fg:foreground bg:box)[](fg:box)'
+symbol = '󰎙 '
 
-[dart]
-symbol = "🦕"
-style = "bg:color_bg"
-format = '[ $symbol($version) ]($style)'
+[python]
+format = '[─](fg:current_line)[](fg:green)[$symbol](fg:primary bg:green)[](fg:green bg:box)[ $version](fg:foreground bg:box)[](fg:box)'
+symbol = ' '
 
-[rust]
-symbol = ""
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+[c]
+format = '[─](fg:current_line)[](fg:blue)[$symbol](fg:primary bg:blue)[](fg:blue bg:box)[ $version](fg:foreground bg:box)[](fg:box)'
+symbol = ' '
+
+[direnv]
+disabled = false
+format = '[─](fg:current_line)[](fg:yellow)[$symbol](fg:primary bg:yellow)[](fg:yellow bg:box)[ $allowed ](fg:foreground bg:box)[](fg:box)'
+symbol = ' '
+not_allowed_msg = ''
+allowed_msg = '󰄭'
+
+[fill]
+symbol = '─'
+style = 'fg:current_line'
+
+[cmd_duration]
+min_time = 500
+format = '[─](fg:current_line)[](fg:orange)[ ](fg:primary bg:orange)[](fg:orange bg:box)[ $duration ](fg:foreground bg:box)[](fg:box)'
 
 [time]
+format = '[─](fg:current_line)[](fg:purple)[󰦖 ](fg:primary bg:purple)[](fg:purple bg:box)[ $time](fg:foreground bg:box)[](fg:box)'
+time_format = '%H:%M'
 disabled = false
-time_format = "%R" # Hour:Minute Format
-style = "fg:white bg:color_bg"
-format = "[\ue0ba](color_bg)[  $time ]($style)[\ue0bc](color_bg)"
+
+[character]
+format = """
+[╰─$symbol](fg:current_line) """
+success_symbol = '[λ](fg:bold white)'
+error_symbol = '[×](fg:bold red)'

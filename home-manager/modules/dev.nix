@@ -33,7 +33,7 @@
       "files.autoSave" = "afterDelay";
       "editor.formatOnSave" = true;
       "editor.fontSize" = 12;
-      "editor.fontFamily" = "'JetBrains Mono'";
+      "editor.fontFamily" = "'JetBrainsMono Nerd Font'";
       "editor.fontLigatures" = true;
       "editor.wordWrap" = "bounded";
       "editor.wordWrapColumn" = 120;
