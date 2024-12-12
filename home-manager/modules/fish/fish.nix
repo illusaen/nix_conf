@@ -33,6 +33,7 @@
       nrn = "darwin-rebuild switch --flake $NIX_CONF";
       ncg = "nix-collect-garbage";
       devnode = "nix flake init --template $NIX_CONF#node";
+      devrust = "nix flake init --template $NIX_CONF#rust";
       grl = "gh repo list | fzf";
     };
 
