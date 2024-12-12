@@ -11,35 +11,31 @@
 
   outputs =
     {
-      self,
       nixpkgs,
       systems,
       ...
-    }@inputs:
+    }:
     let
-      forEachSystem = nixpkgs.lib.genAttrs (import systems);
+      forEachSystem =
+        f:
+        nixpkgs.lib.genAttrs (import systems) (
+          system:
+          f {
+            pkgs = import nixpkgs {
+              inherit system;
+            };
+          }
+        );
     in
     {
       devShells = forEachSystem (
-        system:
-        let
-          pkgs = nixpkgs.legacyPackages.${system};
-        in
+        { pkgs }:
         {
-          default = devenv.lib.mkShell {
-            inherit inputs pkgs;
-            modules = [
-              {
-                languages.javascript = {
-                  enable = true;
-                  package = pkgs.nodejs-slim_22;
-                  pnpm = {
-                    enable = true;
-                    install.enable = true;
-                  };
-                };
-                languages.typescript.enable = true;
-              }
+          default = pkgs.mkShell {
+            packages = with pkgs; [
+              nodejs-slim_latest
+              nodePackages.pnpm
+              nodePackages.typescript-language-server
             ];
           };
         }
