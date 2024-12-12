@@ -41,7 +41,11 @@
     EDITOR = "hx";
   };
 
-  home.packages = with pkgs; [ raycast ];
+  home.packages = with pkgs; [
+    raycast
+    warp-terminal
+    google-chrome
+  ];
 
   programs.home-manager.enable = true;
   home.stateVersion = "24.11";

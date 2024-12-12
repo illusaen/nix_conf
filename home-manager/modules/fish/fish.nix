@@ -3,7 +3,7 @@
 {
   home.sessionVariables = {
     fzf_preview_dir_cmd = "eza --all --color=always";
-    NIX_CONF = "~/nix_conf";
+    NIX_CONF = "$HOME/nix_conf";
   };
 
   programs.fish = {
