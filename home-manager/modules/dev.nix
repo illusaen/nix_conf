@@ -30,6 +30,8 @@
       "files.autoSave" = "afterDelay";
       "editor.formatOnSave" = true;
       "editor.fontSize" = 12;
+      "editor.fontFamily" = "'JetBrains Mono'";
+      "editor.fontLigatures" = true;
       "editor.wordWrap" = "bounded";
       "editor.wordWrapColumn" = 120;
       "nix.enableLanguageServer" = true;
