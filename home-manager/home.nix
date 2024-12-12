@@ -12,6 +12,7 @@
     ./modules/starship/starship.nix
     ./modules/dev.nix
     ./modules/cli.nix
+    ./modules/wezterm/wezterm.nix
   ];
 
   nixpkgs = {
@@ -36,7 +37,6 @@
 
   home.packages = with pkgs; [
     raycast
-    warp-terminal
     google-chrome
   ];
 

@@ -23,7 +23,6 @@
     options = "--delete-older-than 7d";
   };
   nixpkgs.config.allowUnfree = true;
-  # nixpkgs.config.allowBroken = true;
 
   networking.hostName = HOST;
   networking.computerName = HOST;
@@ -41,6 +40,14 @@
       then
         shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
         exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+      fi
+    '';
+  };
+  programs.zsh = {
+    interactiveShellInit = ''
+      if [[ $(${pkgs.procps}/bin/ps -p $PPID -o 'comm') != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
+      then
+        exec ${pkgs.fish}/bin/fish
       fi
     '';
   };
