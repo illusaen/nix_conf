@@ -14,6 +14,7 @@ let
     ./modules/helix/helix.nix
     ./modules/fish/fish.nix
     ./modules/starship/starship.nix
+    ./modules/lunarvim/lunarvim.nix
     ./modules/dev.nix
     ./modules/cli.nix
   ];

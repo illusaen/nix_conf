@@ -1,8 +1,8 @@
 { pkgs, lib, ... }:
 
-let 
+let
   isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
-in 
+in
 {
   home.packages = with pkgs; [
     nixd
