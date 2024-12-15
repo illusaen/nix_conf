@@ -21,9 +21,10 @@
         setCursor = true;
         function = "git_add_commit_push";
       };
-      ggcl = {
+      git_clone_repo = {
         setCursor = true;
         function = "git_clone_own_repo";
+        regex = "^g(gc|r)l$";
       };
       cat = "bat";
       l = "eza";
@@ -36,18 +37,43 @@
         else
           "sudo nixos-rebuild switch --flake $NIX_CONF#${HOST}";
       ncg = "nix-collect-garbage";
-      devnode = "nix flake init --template $NIX_CONF#node";
-      devrust = "nix flake init --template $NIX_CONF#rust";
-      grl = "gh repo list | fzf";
+      create_dev_shell_languages = {
+        regex = "^dev[a-zA-Z]+";
+        function = "create_development_shell";
+      };
     };
 
     functions = {
+      create_development_shell = ''
+        if string match -rq '^dev(?<language>node|rust)$' $argv
+          echo "$HOME/.local/bin/scripts/devshell.sh $language"
+        else
+          echo "$language template doesn't exist yet."
+        end
+      '';
+
       git_add_commit_push = ''
         echo 'git add .;git commit -m "%";git push'
       '';
 
       git_clone_own_repo = ''
-        echo "git clone git@github.com:illusaen/%.git"
+        set --local base_url 'git@github.com:illusaen/'
+        set --local default_result git clone $base_url'%.git'
+        switch $argv
+            case ggcl
+                echo $default_result
+            case grl
+                set --local repo_name (gh repo list | fzf)
+                if test -z "$repo_name"
+                    echo ""
+                else
+                    if string match -rq '^.+\/(?<repo>\S+).+$' $repo_name
+                      echo git clone $base_url$repo'.git'
+                    else
+                      echo ""
+                    end
+                end
+        end
       '';
     };
 

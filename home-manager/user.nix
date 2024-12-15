@@ -1,7 +1,9 @@
 {
+  config,
   isDarwin,
   USER,
   HOME,
+  HM_MODULE_DIR,
   ...
 }:
 
@@ -33,10 +35,13 @@ in
   home = {
     username = USER;
     homeDirectory = HOME;
+    sessionVariables = {
+      EDITOR = "hx";
+    };
   };
 
-  home.sessionVariables = {
-    EDITOR = "hx";
+  home.file.".local/bin/scripts" = {
+    source = config.lib.file.mkOutOfStoreSymlink "${HM_MODULE_DIR}/../scripts";
   };
 
   programs.home-manager.enable = true;

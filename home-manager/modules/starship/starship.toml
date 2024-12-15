@@ -48,6 +48,7 @@ ignore_submodules = true
 format = '[ $all_status](fg:foreground bg:box)[](fg:box)'
 
 [nodejs]
+disabled = false
 format = '[─](fg:current_line)[](fg:green)[$symbol](fg:primary bg:green)[](fg:green bg:box)[ $version](fg:foreground bg:box)[](fg:box)'
 symbol = '󰎙 '
 

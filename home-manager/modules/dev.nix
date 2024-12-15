@@ -1,5 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
+let 
+  isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
+in 
 {
   home.packages = with pkgs; [
     nixd
@@ -16,8 +19,7 @@
       hide_env_diff = true;
       whitelist = {
         prefix = [
-          "~/Documents/projects"
-          "~/projects"
+          (if isDarwin then "~/Documents/projects" else "~/projects")
         ];
       };
     };
@@ -28,9 +30,12 @@
     userName = "Wendy Chen";
     userEmail = "jaewchen@gmail.com";
     difftastic.enable = true;
-    extraConfig = {
-      init.defaultBranch = "main";
-      push.autoSetupRemote = true;
-    };
+    extraConfig = lib.mkMerge [
+      {
+        init.defaultBranch = "main";
+        push.autoSetupRemote = true;
+      }
+      (lib.mkIf (!isDarwin) { core.sshCommand = "ssh.exe"; })
+    ];
   };
 }
