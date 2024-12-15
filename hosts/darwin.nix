@@ -1,4 +1,5 @@
 {
+  nixpkgs,
   outputs,
   nix-darwin,
   home-manager,
@@ -9,6 +10,10 @@
   ...
 }:
 
+let
+  system = "x86_64-linux";
+  pkgs = import nixpkgs { inherit system; };
+in
 {
   "${HOST}" = nix-darwin.lib.darwinSystem {
     modules = [
@@ -16,7 +21,7 @@
         system.configurationRevision = outputs.rev or outputs.dirtyRev or null;
         nixpkgs.hostPlatform = "aarch64-darwin";
         system.stateVersion = 5;
-        
+
         fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono ];
 
         networking.computerName = HOST;

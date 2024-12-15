@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, HOST, ... }:
 
 {
   home.sessionVariables = {
@@ -30,7 +30,11 @@
       ll = "eza -al";
       lt = "eza --tree --git-ignore --all";
       ncn = "code $NIX_CONF";
-      nrn = "darwin-rebuild switch --flake $NIX_CONF";
+      nrn =
+        if pkgs.stdenv.hostPlatform.isDarwin then
+          "darwin-rebuild switch --flake $NIX_CONF"
+        else
+          "sudo nixos-rebuild switch --flake $NIX_CONF#${HOST}";
       ncg = "nix-collect-garbage";
       devnode = "nix flake init --template $NIX_CONF#node";
       devrust = "nix flake init --template $NIX_CONF#rust";

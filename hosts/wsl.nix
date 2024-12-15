@@ -2,7 +2,6 @@
   nixpkgs,
   nixos-wsl,
   home-manager,
-  inputs,
   USER,
   HOST,
   HOME,
@@ -17,11 +16,18 @@ in
 {
   "${HOST}" = nixpkgs.lib.nixosSystem {
     specialArgs = {
-      inherit USER HOME CONFIG_DIR HOST;
+      inherit
+        USER
+        HOME
+        CONFIG_DIR
+        HOST
+        ;
     };
     modules = [
-      { nix.registry.nixpkgs.flake = nixpkgs; }
-      { nixpkgs.hostPlatform = { system = system; }; }
+      {
+        nix.registry.nixpkgs.flake = nixpkgs;
+        nixpkgs.hostPlatform.system = system;
+      }
       nixos-wsl.nixosModules.default
       {
         wsl.enable = true;

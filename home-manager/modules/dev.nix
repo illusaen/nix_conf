@@ -15,7 +15,10 @@
     config = {
       hide_env_diff = true;
       whitelist = {
-        prefix = [ "~/Documents/projects" ];
+        prefix = [
+          "~/Documents/projects"
+          "~/projects"
+        ];
       };
     };
   };

@@ -1,6 +1,10 @@
 { pkgs, ... }:
 
 {
+  imports = [
+    ./modules/wezterm/wezterm.nix
+  ];
+
   home.packages = with pkgs; [
     raycast
     google-chrome

@@ -4,6 +4,7 @@
   programs = {
     bat.enable = true;
     fd.enable = true;
+    ripgrep.enable = true;
     eza = {
       enable = true;
       icons = "auto";

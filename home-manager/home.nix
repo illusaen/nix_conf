@@ -2,6 +2,7 @@
   pkgs,
   USER,
   HOME,
+  HOST,
   CONFIG_DIR,
   ...
 }:
@@ -14,6 +15,14 @@ in
     useGlobalPkgs = true;
     useUserPackages = true;
     users."${USER}" = import ./user.nix;
-    extraSpecialArgs = { inherit USER HOME HM_MODULE_DIR isDarwin; };
+    extraSpecialArgs = {
+      inherit
+        USER
+        HOME
+        HOST
+        HM_MODULE_DIR
+        isDarwin
+        ;
+    };
   };
 }

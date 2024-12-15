@@ -14,11 +14,10 @@ let
     ./modules/starship/starship.nix
     ./modules/dev.nix
     ./modules/cli.nix
-    ./modules/wezterm/wezterm.nix
   ];
 in
 {
-  imports = shared-modules ++ (if isDarwin then [darwin-file] else []);
+  imports = shared-modules ++ (if isDarwin then [ darwin-file ] else [ ]);
 
   nixpkgs = {
     config = {
