@@ -25,6 +25,8 @@ in
     };
   };
 
+  programs.lazygit.enable = true;
+
   programs.git = {
     enable = true;
     userName = "Wendy Chen";
