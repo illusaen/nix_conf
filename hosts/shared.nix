@@ -25,14 +25,10 @@
   nixpkgs.config.allowUnfree = true;
 
   networking.hostName = HOST;
-  networking.computerName = HOST;
-  system.defaults.smb.NetBIOSName = HOST;
   users.users."${USER}" = {
     name = USER;
     home = HOME;
   };
-
-  fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono ];
 
   programs.bash = {
     interactiveShellInit = ''
@@ -52,7 +48,4 @@
     '';
   };
   programs.fish.enable = true;
-
-  programs._1password-gui.enable = true;
-  programs._1password.enable = false;
 }

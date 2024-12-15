@@ -12,7 +12,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-wsl = {
-      url = "github:nix-community/NixOS-WSL";
+      url = "github:nix-community/NixOS-WSL/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -25,7 +25,7 @@
       home-manager,
       self,
       ...
-    }:
+    }@inputs:
     let
       USER = "wendy";
       HOME_DARWIN = "/Users/${USER}";
@@ -53,6 +53,7 @@
       nixosConfigurations = (
         import ./hosts/wsl.nix {
           inherit
+            inputs
             nixpkgs
             nixos-wsl
             home-manager

@@ -16,6 +16,14 @@
         system.configurationRevision = outputs.rev or outputs.dirtyRev or null;
         nixpkgs.hostPlatform = "aarch64-darwin";
         system.stateVersion = 5;
+        
+        fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono ];
+
+        networking.computerName = HOST;
+        system.defaults.smb.NetBIOSName = HOST;
+
+        programs._1password-gui.enable = true;
+        programs._1password.enable = false;
       }
       ./shared.nix
       ./darwin-1password.nix

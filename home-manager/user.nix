@@ -1,12 +1,14 @@
 {
-  pkgs,
+  isDarwin,
   USER,
   HOME,
   ...
 }:
 
-{
-  imports = [
+let
+  darwin-file = ./darwin-modules.nix;
+
+  shared-modules = [
     ./modules/helix/helix.nix
     ./modules/fish/fish.nix
     ./modules/starship/starship.nix
@@ -14,6 +16,9 @@
     ./modules/cli.nix
     ./modules/wezterm/wezterm.nix
   ];
+in
+{
+  imports = shared-modules ++ (if isDarwin then [darwin-file] else []);
 
   nixpkgs = {
     config = {
@@ -34,11 +39,6 @@
   home.sessionVariables = {
     EDITOR = "hx";
   };
-
-  home.packages = with pkgs; [
-    raycast
-    google-chrome
-  ];
 
   programs.home-manager.enable = true;
   home.stateVersion = "24.11";
