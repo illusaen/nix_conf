@@ -48,7 +48,7 @@
         if string match -rq '^dev(?<language>node|rust)$' $argv
           echo "$HOME/.local/bin/scripts/devshell.sh $language"
         else
-          echo "$language template doesn't exist yet."
+          echo "$language template doesn't exist yet." > /dev/stdout
         end
       '';
 
@@ -60,19 +60,13 @@
         set --local base_url 'git@github.com:illusaen/'
         set --local default_result git clone $base_url'%.git'
         switch $argv
-            case ggcl
-                echo $default_result
-            case grl
-                set --local repo_name (gh repo list | fzf)
-                if test -z "$repo_name"
-                    echo ""
-                else
-                    if string match -rq '^.+\/(?<repo>\S+).+$' $repo_name
-                      echo git clone $base_url$repo'.git'
-                    else
-                      echo ""
-                    end
-                end
+          case ggcl
+            echo $default_result
+          case grl
+            set --local repo_name (gh repo list | fzf)
+            if test -n "$repo_name" && string match -rq '^.+\/(?<repo>\S+).+$' $repo_name
+              echo git clone $base_url$repo'.git'
+            end
         end
       '';
     };
