@@ -1,4 +1,4 @@
-excludes = ["*.lock"]
+excludes = ["*.lock", ".gitignore"]
 
 [formatter.fish_indent]
 command = "fish_indent-wrapper"
@@ -27,31 +27,3 @@ command = "toml-sort"
 excludes = []
 includes = ["*.toml"]
 options = ["-i"]
-
-[formatter.prettier]
-command = "prettier"
-excludes = []
-includes = [
-    "*.cjs",
-    "*.css",
-    "*.html",
-    "*.js",
-    "*.json",
-    "*.json5",
-    "*.jsx",
-    "*.md",
-    "*.mdx",
-    "*.mjs",
-    "*.scss",
-    "*.ts",
-    "*.tsx",
-    "*.vue",
-    "*.yaml",
-    "*.yml",
-]
-options = ["--write"]
-
-[formatter.rustfmt]
-command = "rustfmt"
-excludes = []
-includes = ["*.rs"]

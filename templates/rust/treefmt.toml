@@ -1,0 +1,16 @@
+excludes = ["*.lock", ".gitignore", ".*rc", ".direnv/*", "*.png"]
+
+[formatter.nixfmt-rfc-style]
+command = "nixfmt"
+includes = ["*.nix"]
+
+[formatter.rustfmt]
+command = "rustfmt"
+excludes = []
+includes = ["*.rs"]
+
+[formatter.toml-sort]
+command = "toml-sort"
+excludes = []
+includes = ["*.toml"]
+options = ["-i"]

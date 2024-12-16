@@ -38,7 +38,6 @@ in
     homeDirectory = HOME;
     sessionVariables = {
       EDITOR = "hx";
-      TREEFMT_CONFIG = "${HM_MODULE_DIR}/treefmt.toml";
       fzf_preview_dir_cmd = "eza --all --color=always";
       NIX_CONF = "$HOME/nix_conf";
     };

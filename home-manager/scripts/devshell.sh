@@ -20,6 +20,18 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+if [ ! -f .envrc ]; then
+  echo "  Copying .envrc file..."
+
+  SOURCE_ENVRC_PATH="$NIX_CONF/templates/shared/.envrc"
+  if [ -f "$SOURCE_ENVRC_PATH" ]; then
+    cp "$SOURCE_ENVRC_PATH" .envrc
+  else
+    echo "Error: Source .envrc file not found at $SOURCE_ENVRC_PATH"
+    exit 1
+  fi
+fi
+
 GITIGNORE_CONTENT=".direnv"
 if ! ([ -f .gitignore ] && rg -Fxq "$GITIGNORE_CONTENT" .gitignore); then
   echo "  Adding $GITIGNORE_CONTENT to .gitignore"
