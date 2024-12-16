@@ -1,4 +1,4 @@
-excludes = ["*.lock", ".gitignore"]
+excludes = ["*.lock", ".gitignore", "**/*.prettierrc"]
 
 [formatter.fish_indent]
 command = "fish_indent-wrapper"

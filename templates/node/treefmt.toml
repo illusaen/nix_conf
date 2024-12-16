@@ -4,12 +4,6 @@ excludes = ["*.lock", ".gitignore", ".*rc", ".direnv/*", "*.png", "node_modules/
 command = "nixfmt"
 includes = ["*.nix"]
 
-[formatter.toml-sort]
-command = "toml-sort"
-excludes = []
-includes = ["*.toml"]
-options = ["-i"]
-
 [formatter.prettier]
 command = "prettier"
 excludes = []

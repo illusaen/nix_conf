@@ -66,6 +66,7 @@
               cargo-watch
               cargo-edit
               rust-analyzer
+              toml-sort
             ];
 
             env = {
