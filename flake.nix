@@ -23,30 +23,61 @@
       nix-darwin,
       nixos-wsl,
       home-manager,
+      systems,
       self,
       ...
     }@inputs:
     let
       USER = "wendy";
-      HOME_DARWIN = "/Users/${USER}";
-      HOME_WSL = "/home/${USER}";
-      HOST_DARWIN = "idunn";
-      HOST_WSL = "loki";
       CONFIG_DIR = "nix_conf";
       inherit (self) outputs;
+
+      forEachSystem =
+        f:
+        nixpkgs.lib.genAttrs (import systems) (
+          system:
+          f {
+            pkgs = import nixpkgs {
+              inherit system;
+            };
+          }
+        );
     in
     {
+      devShells = forEachSystem (
+        { pkgs }:
+        {
+          default = pkgs.mkShell {
+            packages = with pkgs; [
+              shfmt
+              stylua
+              toml-sort
+              (writeShellApplication {
+                name = "fish_indent-wrapper";
+                runtimeInputs = [
+                  pkgs.findutils
+                ];
+                text = ''
+                  fish_indent --check "$@" 2>&1 | xargs --no-run-if-empty fish_indent --write || true
+                '';
+              })
+            ];
+          };
+        }
+      );
+
       darwinConfigurations = (
         import ./hosts/darwin.nix {
           inherit
+            nixpkgs
             nix-darwin
             home-manager
             outputs
             USER
             CONFIG_DIR
             ;
-          HOST = HOST_DARWIN;
-          HOME = HOME_DARWIN;
+          HOST = "idunn";
+          HOME = "/Users/${USER}";
         }
       );
 
@@ -60,8 +91,8 @@
             USER
             CONFIG_DIR
             ;
-          HOST = HOST_WSL;
-          HOME = HOME_WSL;
+          HOST = "loki";
+          HOME = "/home/${USER}";
         }
       );
 

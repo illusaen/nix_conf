@@ -31,6 +31,7 @@
               nodejs-slim_latest
               nodePackages.pnpm
               nodePackages.typescript-language-server
+              nodePackages.prettier
             ];
           };
         }

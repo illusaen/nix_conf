@@ -14,22 +14,22 @@ $time\
 $line_break\
 $character\
 """
-
 palette = 'dracula'
 add_newline = true
 
-[palettes.dracula]
-foreground = '#F8F8F2'
-current_line = '#44475A'
-primary = '#1A1F29'
-box = '#44475A'
-blue = '#80bfff'
-green = '#d5ff80'
-orange = '#ffd173'
-pink = '#f28779'
-purple = '#dfbfff'
-red = '#FF5555'
-yellow = '#73d0ff'
+[c]
+format = '[─](fg:current_line)[](fg:blue)[$symbol](fg:primary bg:blue)[](fg:blue bg:box)[ $version](fg:foreground bg:box)[](fg:box)'
+symbol = ' '
+
+[character]
+format = """
+[╰─$symbol](fg:current_line) """
+success_symbol = '[λ](fg:bold white)'
+error_symbol = '[×](fg:bold red)'
+
+[cmd_duration]
+min_time = 500
+format = '[─](fg:current_line)[](fg:orange)[ ](fg:primary bg:orange)[](fg:orange bg:box)[ $duration ](fg:foreground bg:box)[](fg:box)'
 
 [directory]
 format = '[─](fg:current_line)[](fg:pink)[󰷏 ](fg:primary bg:pink)[](fg:pink bg:box)[ $read_only$truncation_symbol$path](fg:foreground bg:box)[](fg:box)'
@@ -38,6 +38,17 @@ truncation_symbol = ' '
 truncation_length = 2
 read_only = '󱧵 '
 read_only_style = ''
+
+[direnv]
+disabled = false
+format = '[─](fg:current_line)[](fg:yellow)[$symbol](fg:primary bg:yellow)[](fg:yellow bg:box)[ $allowed ](fg:foreground bg:box)[](fg:box)'
+symbol = ' '
+not_allowed_msg = ''
+allowed_msg = '󰄭'
+
+[fill]
+symbol = '─'
+style = 'fg:current_line'
 
 [git_branch]
 format = '[─](fg:current_line)[](fg:green)[$symbol](fg:primary bg:green)[](fg:green bg:box)[ $branch](fg:foreground bg:box)'
@@ -52,36 +63,24 @@ disabled = false
 format = '[─](fg:current_line)[](fg:green)[$symbol](fg:primary bg:green)[](fg:green bg:box)[ $version](fg:foreground bg:box)[](fg:box)'
 symbol = '󰎙 '
 
+[palettes.dracula]
+foreground = '#F8F8F2'
+current_line = '#44475A'
+primary = '#1A1F29'
+box = '#44475A'
+blue = '#80bfff'
+green = '#d5ff80'
+orange = '#ffd173'
+pink = '#f28779'
+purple = '#dfbfff'
+red = '#FF5555'
+yellow = '#73d0ff'
+
 [python]
 format = '[─](fg:current_line)[](fg:green)[$symbol](fg:primary bg:green)[](fg:green bg:box)[ $version](fg:foreground bg:box)[](fg:box)'
 symbol = ' '
-
-[c]
-format = '[─](fg:current_line)[](fg:blue)[$symbol](fg:primary bg:blue)[](fg:blue bg:box)[ $version](fg:foreground bg:box)[](fg:box)'
-symbol = ' '
-
-[direnv]
-disabled = false
-format = '[─](fg:current_line)[](fg:yellow)[$symbol](fg:primary bg:yellow)[](fg:yellow bg:box)[ $allowed ](fg:foreground bg:box)[](fg:box)'
-symbol = ' '
-not_allowed_msg = ''
-allowed_msg = '󰄭'
-
-[fill]
-symbol = '─'
-style = 'fg:current_line'
-
-[cmd_duration]
-min_time = 500
-format = '[─](fg:current_line)[](fg:orange)[ ](fg:primary bg:orange)[](fg:orange bg:box)[ $duration ](fg:foreground bg:box)[](fg:box)'
 
 [time]
 format = '[─](fg:current_line)[](fg:purple)[󰦖 ](fg:primary bg:purple)[](fg:purple bg:box)[ $time](fg:foreground bg:box)[](fg:box)'
 time_format = '%H:%M'
 disabled = false
-
-[character]
-format = """
-[╰─$symbol](fg:current_line) """
-success_symbol = '[λ](fg:bold white)'
-error_symbol = '[×](fg:bold red)'

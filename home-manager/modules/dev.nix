@@ -7,6 +7,7 @@ in
   home.packages = with pkgs; [
     nixd
     nixfmt-rfc-style
+    treefmt2
   ];
 
   programs.gh.enable = true;

@@ -1,12 +1,22 @@
-{ pkgs, HOST, ... }:
-
 {
-  home.sessionVariables = {
-    fzf_preview_dir_cmd = "eza --all --color=always";
-    NIX_CONF = "$HOME/nix_conf";
-  };
+  pkgs,
+  HOST,
+  USER,
+  ...
+}:
 
+let
+  isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
+  wslCommands = ''fish_add_path --append "/mnt/c/Users/${USER}/AppData/Local/Microsoft/WinGet/Packages/equalsraf.win32yank_Microsoft.Winget.Source_8wekyb3d8bbwe"'';
+in
+{
   programs.fish = {
+    interactiveShellInit =
+      ''
+        fish_add_path --append "$HOME/.local/bin"
+      ''
+      + (if !isDarwin then wslCommands else "");
+
     enable = true;
 
     shellAbbrs = {
@@ -26,19 +36,20 @@
         function = "git_clone_own_repo";
         regex = "^g(gc|r)l$";
       };
+      lg = "lazygit";
       cat = "bat";
       l = "eza";
       ll = "eza -al";
       lt = "eza --tree --git-ignore --all";
       ncn = "code $NIX_CONF";
       nrn =
-        if pkgs.stdenv.hostPlatform.isDarwin then
+        if isDarwin then
           "darwin-rebuild switch --flake $NIX_CONF"
         else
           "sudo nixos-rebuild switch --flake $NIX_CONF#${HOST}";
       ncg = "nix-collect-garbage";
       create_dev_shell_languages = {
-        regex = "^dev[a-zA-Z]+";
+        regex = "^dev[a-zA-Z]+$";
         function = "create_development_shell";
       };
     };
