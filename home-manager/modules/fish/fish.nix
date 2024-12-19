@@ -56,7 +56,7 @@ in
 
     functions = {
       create_development_shell = ''
-        if string match -rq '^dev(?<language>node|rust)$' $argv
+        if string match -rq '^dev(?<language>node|rust|python)$' $argv
           echo "$HOME/.local/bin/scripts/devshell.sh $language"
         else
           echo "$language template doesn't exist yet." > /dev/stdout
@@ -78,6 +78,15 @@ in
             if test -n "$repo_name" && string match -rq '^.+\/(?<repo>\S+).+$' $repo_name
               echo git clone $base_url$repo'.git'
             end
+        end
+      '';
+
+      mkd = ''
+        if test -n "$argv"
+          mkdir -p $argv
+          cd $argv
+        else
+          echo "Usage: mkd <directory>"
         end
       '';
     };

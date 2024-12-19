@@ -1,0 +1,9 @@
+excludes = ["*.lock", ".gitignore", ".*rc", ".direnv/*", "*.png", ".venv/*"]
+
+[formatter.black]
+command = "black"
+includes = ["*.py", "*.pyi"]
+
+[formatter.nixfmt-rfc-style]
+command = "nixfmt"
+includes = ["*.nix"]

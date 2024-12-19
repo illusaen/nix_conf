@@ -77,7 +77,7 @@ red = '#FF5555'
 yellow = '#73d0ff'
 
 [python]
-format = '[─](fg:current_line)[](fg:green)[$symbol](fg:primary bg:green)[](fg:green bg:box)[ $version](fg:foreground bg:box)[](fg:box)'
+format = '[─](fg:current_line)[](fg:green)[$symbol](fg:primary bg:green)[](fg:green bg:box)[ $version (\($virtualenv\))](fg:foreground bg:box)[](fg:box)'
 symbol = ' '
 
 [time]

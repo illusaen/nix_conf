@@ -32,6 +32,10 @@ if [ ! -f .envrc ]; then
   fi
 fi
 
+if [ "$NAME" == "python" ]; then
+  echo -e "layout python3" >>.envrc
+fi
+
 GITIGNORE_CONTENT=".direnv"
 if ! ([ -f .gitignore ] && rg -Fxq "$GITIGNORE_CONTENT" .gitignore); then
   echo "  Adding $GITIGNORE_CONTENT to .gitignore"

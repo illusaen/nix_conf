@@ -105,6 +105,10 @@
           path = ./templates/rust;
           description = "Rust with cargo and direnv";
         };
+        python = {
+          path = ./templates/python;
+          description = "Python with venvshellhook";
+        };
       };
     };
 }
