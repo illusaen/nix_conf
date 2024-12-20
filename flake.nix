@@ -109,6 +109,10 @@
           path = ./templates/python;
           description = "Python with venvshellhook";
         };
+        deno = {
+          path = ./templates/deno;
+          description = "Deno with prettier for svelte and direnv";
+        };
       };
     };
 }
