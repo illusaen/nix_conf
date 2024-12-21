@@ -2,6 +2,7 @@
   pkgs,
   HOST,
   USER,
+  config,
   ...
 }:
 
@@ -20,6 +21,8 @@ in
     enable = true;
 
     shellAbbrs = {
+      cd = "j";
+      cdd = "builtin cd";
       ga = "git add";
       gd = "git diff";
       gco = "git checkout";
@@ -36,6 +39,7 @@ in
         function = "git_clone_own_repo";
         regex = "^g(gc|r)l$";
       };
+      rmr = "rm -r";
       lg = "lazygit";
       cat = "bat";
       l = "eza";
@@ -55,14 +59,6 @@ in
     };
 
     functions = {
-      create_development_shell = ''
-        if string match -rq '^dev(?<language>node|rust|python|deno)$' $argv
-          echo "$HOME/.local/bin/scripts/devshell.sh $language"
-        else
-          echo "$language template doesn't exist yet." > /dev/stdout
-        end
-      '';
-
       git_add_commit_push = ''
         echo 'git add .;git commit -m "%";git push'
       '';
@@ -108,4 +104,8 @@ in
   };
 
   xdg.configFile."fish/conf.d/autols.fish".source = ./autols.fish;
+  xdg.configFile."fish/functions/get_directory_names.fish".source =
+    config.lib.file.mkOutOfStoreSymlink ./get_directory_names.fish;
+  xdg.configFile."fish/functions/create_development_shell.fish".source =
+    config.lib.file.mkOutOfStoreSymlink ./create_development_shell.fish;
 }
