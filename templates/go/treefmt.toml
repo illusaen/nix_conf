@@ -1,0 +1,11 @@
+excludes = ["*.lock", ".gitignore", ".*rc", ".direnv/*", "*.png", "node_modules/*"]
+
+[formatter.nixfmt-rfc-style]
+command = "nixfmt"
+includes = ["*.nix"]
+
+[formatter.gofmt]
+command = "gofmt"
+excludes = []
+includes = ["*.go"]
+options = ["-w"]
