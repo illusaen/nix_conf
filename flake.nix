@@ -113,6 +113,10 @@
           path = ./templates/deno;
           description = "Deno with prettier for svelte and direnv";
         };
+        bun = {
+          path = ./templates/bun;
+          description = "Bun with prettier for svelte and direnv";
+        };
         go = {
           path = ./templates/go;
           description = "Go with gotools and direnv";

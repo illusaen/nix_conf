@@ -28,7 +28,9 @@
         {
           default = pkgs.mkShell {
             packages = with pkgs; [
-              go gotools go-tools gopls
+              nodejs-slim_latest
+              bun
+              nodePackages.prettier
             ];
           };
         }
