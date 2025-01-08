@@ -28,7 +28,10 @@
   users.users."${USER}" = {
     name = USER;
     home = HOME;
+    shell = pkgs.bash;
   };
 
-  programs.fish.enable = true;
+  programs.bash = {
+    blesh.enable = true;
+  };
 }

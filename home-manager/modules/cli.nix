@@ -10,13 +10,9 @@
       icons = "auto";
       git = true;
     };
-    fzf = {
-      enable = true;
-      enableFishIntegration = false;
-    };
+    fzf.enable = true;
     zoxide = {
       enable = true;
-      enableFishIntegration = true;
       options = [ "--cmd j" ];
     };
   };

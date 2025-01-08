@@ -12,7 +12,7 @@ let
 
   shared-modules = [
     ./modules/helix/helix.nix
-    ./modules/fish/fish.nix
+    ./modules/bash/bash.nix
     ./modules/starship/starship.nix
     ./modules/lunarvim/lunarvim.nix
     ./modules/dev.nix
@@ -38,8 +38,8 @@ in
     homeDirectory = HOME;
     sessionVariables = {
       EDITOR = "hx";
-      fzf_preview_dir_cmd = "eza --all --color=always";
       NIX_CONF = "$HOME/nix_conf";
+      fzf_preview_dir_cmd = "eza --all --color=always";
     };
   };
 
