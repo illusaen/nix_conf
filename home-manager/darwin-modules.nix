@@ -34,6 +34,7 @@
       "editor.minimap.enabled" = false;
       "terminal.integrated.defaultProfile.osx" = "fish";
       "workbench.colorTheme" = "Ayu Mirage";
+      "workbench.startupEditor": "none",
     };
   };
 }

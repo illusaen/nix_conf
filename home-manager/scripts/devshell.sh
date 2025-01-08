@@ -32,6 +32,11 @@ if [ ! -f .envrc ]; then
   fi
 fi
 
+SOURCE_PRETTIERRC_PATH="$NIX_CONF/templates/shared/.prettierrc"
+if [ "$NAME" == "deno" ] || [ "$NAME" == "node" ] || [ "$NAME" == "bun" ]; then
+  cp "$SOURCE_PRETTIERRC_PATH" .prettierrc
+fi
+
 if [ "$NAME" == "python" ]; then
   echo -e "layout python3" >>.envrc
 fi
