@@ -7,6 +7,7 @@
   HOST,
   HOME,
   CONFIG_DIR,
+  HM_MODULE_DIR,
   ...
 }:
 
@@ -43,6 +44,7 @@ in
         HOST
         HOME
         CONFIG_DIR
+        HM_MODULE_DIR
         ;
     };
   };

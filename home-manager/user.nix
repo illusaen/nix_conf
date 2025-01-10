@@ -9,6 +9,7 @@
 
 let
   darwin-file = ./darwin-modules.nix;
+  wsl-file = ./wsl-modules.nix;
 
   shared-modules = [
     ./modules/helix/helix.nix
@@ -20,7 +21,7 @@ let
   ];
 in
 {
-  imports = shared-modules ++ (if isDarwin then [ darwin-file ] else [ ]);
+  imports = shared-modules ++ (if isDarwin then [ darwin-file ] else [ wsl-file ]);
 
   nixpkgs = {
     config = {

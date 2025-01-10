@@ -29,6 +29,8 @@
           default = pkgs.mkShell {
             packages = with pkgs; [
               nodejs-slim_latest
+              bun
+              deno
               nodePackages.pnpm
               nodePackages.typescript-language-server
               nodePackages.prettier

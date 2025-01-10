@@ -6,6 +6,7 @@
   HOST,
   HOME,
   CONFIG_DIR,
+  HM_MODULE_DIR,
   ...
 }:
 
@@ -21,12 +22,14 @@ in
         HOME
         CONFIG_DIR
         HOST
+        HM_MODULE_DIR
         ;
     };
     modules = [
       {
         nix.registry.nixpkgs.flake = nixpkgs;
         nixpkgs.hostPlatform.system = system;
+        programs._wezterm.enable = true;
       }
       nixos-wsl.nixosModules.default
       {
@@ -40,6 +43,7 @@ in
         };
       }
       ./shared.nix
+      ./wsl-wezterm.nix
       home-manager.nixosModules.home-manager
       {
         imports = [ ../home-manager/home.nix ];

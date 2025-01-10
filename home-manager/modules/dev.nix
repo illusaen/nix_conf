@@ -1,8 +1,11 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  HM_MODULE_DIR,
+  ...
+}:
 
-let
-  isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
-in
 {
   home.packages = with pkgs; [
     nixd
@@ -12,17 +15,26 @@ in
 
   programs.gh.enable = true;
 
+  xdg.configFile."wezterm/wezterm.lua".source =
+    config.lib.file.mkOutOfStoreSymlink "${HM_MODULE_DIR}/wezterm/wezterm.lua";
+
+  programs.zellij = {
+    enable = true;
+    enableBashIntegration = true;
+    settings = {
+      default_shell = "bash";
+      copy_on_select = true;
+      theme = "ayu_mirage";
+      pane_frames = false;
+    };
+  };
+
   programs.direnv = {
     enable = true;
     silent = true;
     nix-direnv.enable = true;
     config = {
       hide_env_diff = true;
-      whitelist = {
-        prefix = [
-          (if isDarwin then "~/Documents/projects" else "~/projects")
-        ];
-      };
     };
   };
 
@@ -38,7 +50,6 @@ in
         init.defaultBranch = "main";
         push.autoSetupRemote = true;
       }
-      (lib.mkIf (!isDarwin) { core.sshCommand = "ssh.exe"; })
     ];
   };
 }

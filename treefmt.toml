@@ -1,11 +1,5 @@
 excludes = ["*.lock", ".gitignore", "**/*.prettierrc"]
 
-[formatter.fish_indent]
-command = "fish_indent-wrapper"
-excludes = []
-includes = ["*.fish"]
-options = []
-
 [formatter.nixfmt-rfc-style]
 command = "nixfmt"
 includes = ["*.nix"]

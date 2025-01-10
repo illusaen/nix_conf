@@ -3,11 +3,10 @@
   USER,
   HOME,
   HOST,
-  CONFIG_DIR,
+  HM_MODULE_DIR,
   ...
 }:
 let
-  HM_MODULE_DIR = "${HOME}/${CONFIG_DIR}/home-manager/modules";
   isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
 in
 {

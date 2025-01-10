@@ -1,32 +1,29 @@
 {
-  pkgs,
-  HOST,
-  USER,
   config,
   ...
 }:
 
 let
-  isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
-  wslPath = ''fish_add_path --append "/mnt/c/Users/${USER}/AppData/Local/Microsoft/WinGet/Packages/equalsraf.win32yank_Microsoft.Winget.Source_8wekyb3d8bbwe"'';
+  reload = ''
+    source $HOME/.config/bash/devshell.bash
+    source $HOME/.config/bash/git.bash
+  '';
 in
 {
   home.sessionPath = [
     "$HOME/.local/bin"
-  ] ++ (if !isDarwin then [ wslPath ] else [ ]);
+  ];
 
   programs.bash = {
     enable = true;
 
-    initExtra = ''
-      source $HOME/.config/bash/devshell.bash
-      source $HOME/.config/bash/git.bash
-    '';
+    initExtra = reload;
 
     shellAliases = {
       cd = "j";
       cdd = "builtin cd";
       ga = "git add";
+      gal = "git add .";
       gd = "git diff";
       gco = "git checkout";
       gcl = "git clone";
@@ -44,13 +41,9 @@ in
       ll = "eza -al";
       lt = "eza --tree --git-ignore --all";
       ncn = "code $NIX_CONF";
-      nrn =
-        if isDarwin then
-          "darwin-rebuild switch --flake $NIX_CONF"
-        else
-          "sudo nixos-rebuild switch --flake $NIX_CONF#${HOST}";
       ncg = "nix-collect-garbage";
       dev = "create_development_shell";
+      reload = reload;
     };
   };
 

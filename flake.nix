@@ -52,15 +52,6 @@
               shfmt
               stylua
               toml-sort
-              (writeShellApplication {
-                name = "fish_indent-wrapper";
-                runtimeInputs = [
-                  pkgs.findutils
-                ];
-                text = ''
-                  fish_indent --check "$@" 2>&1 | xargs --no-run-if-empty fish_indent --write || true
-                '';
-              })
             ];
           };
         }
@@ -78,6 +69,7 @@
             ;
           HOST = "idunn";
           HOME = "/Users/${USER}";
+          HM_MODULE_DIR = "/home/${USER}/${CONFIG_DIR}/home-manager/modules";
         }
       );
 
@@ -93,6 +85,7 @@
             ;
           HOST = "loki";
           HOME = "/home/${USER}";
+          HM_MODULE_DIR = "/home/${USER}/${CONFIG_DIR}/home-manager/modules";
         }
       );
 
@@ -108,14 +101,6 @@
         python = {
           path = ./templates/python;
           description = "Python with venvshellhook";
-        };
-        deno = {
-          path = ./templates/deno;
-          description = "Deno with prettier for svelte and direnv";
-        };
-        bun = {
-          path = ./templates/bun;
-          description = "Bun with prettier for svelte and direnv";
         };
         go = {
           path = ./templates/go;

@@ -16,22 +16,28 @@ in
     google-chrome
   ];
 
+  programs.direnv.config.whitelist.prefix = [
+    "~/Documents/projects"
+  ];
+
+  programs.bash.shellAliases = {
+    nrn = "cd $NIX_CONF; git add .; darwin-rebuild switch --flake $NIX_CONF; cd -";
+  };
+
+  programs.wezterm.enable = true;
   programs.vscode = {
     enable = true;
-    extensions =
-      with pkgs.vscode-extensions;
-      [
-        jnoortheen.nix-ide
-        mkhl.direnv
-        svelte.svelte-vscode
-        teabyii.ayu
-        ms-vscode-remote.vscode-remote-extensionpack
-        tamasfe.even-better-toml
-        github.copilot-chat
-        github.copilot
-        plugins.ibecker.treefmt-vscode
-      ];
-      # ++ [ pkgs.vscode-marketplace.plugins.ibecker.treefmt-vscode ];
+    extensions = with pkgs.vscode-extensions; [
+      jnoortheen.nix-ide
+      mkhl.direnv
+      svelte.svelte-vscode
+      teabyii.ayu
+      ms-vscode-remote.vscode-remote-extensionpack
+      tamasfe.even-better-toml
+      github.copilot-chat
+      github.copilot
+      plugins.ibecker.treefmt-vscode
+    ];
     userSettings = {
       "files.autoSave" = "afterDelay";
       "editor.formatOnSave" = true;
