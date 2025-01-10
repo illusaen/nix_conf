@@ -20,12 +20,10 @@
 
   programs.zellij = {
     enable = true;
-    enableBashIntegration = true;
     settings = {
       default_shell = "bash";
       copy_on_select = true;
       theme = "ayu_mirage";
-      pane_frames = false;
     };
   };
 

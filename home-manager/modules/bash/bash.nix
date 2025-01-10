@@ -44,6 +44,7 @@ in
       ncg = "nix-collect-garbage";
       dev = "create_development_shell";
       reload = reload;
+      ns = "sudo netstat -plten | grep \"$1\" | awk -F' ' '{print $9}' | awk -F/ '{print $1}' | xargs -r kill";
     };
   };
 

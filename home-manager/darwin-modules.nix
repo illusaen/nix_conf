@@ -28,6 +28,7 @@ in
   programs.vscode = {
     enable = true;
     extensions = with pkgs.vscode-extensions; [
+      dbaeumer.vscode-eslint
       jnoortheen.nix-ide
       mkhl.direnv
       svelte.svelte-vscode
