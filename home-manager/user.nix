@@ -13,11 +13,10 @@ let
 
   shared-modules = [
     ./modules/helix/helix.nix
-    ./modules/bash/bash.nix
+    ./modules/fish/fish.nix
     ./modules/starship/starship.nix
     ./modules/lunarvim/lunarvim.nix
     ./modules/dev.nix
-    ./modules/cli.nix
   ];
 in
 {

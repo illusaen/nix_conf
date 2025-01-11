@@ -20,7 +20,7 @@ in
     "~/Documents/projects"
   ];
 
-  programs.bash.shellAliases = {
+  programs.fish.shellAbbrs = {
     nrn = "cd $NIX_CONF; git add .; darwin-rebuild switch --flake $NIX_CONF; cd -";
   };
 
