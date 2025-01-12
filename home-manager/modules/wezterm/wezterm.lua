@@ -25,5 +25,8 @@ config.window_close_confirmation = "NeverPrompt"
 if platform.is_win then
 	config.default_domain = "WSL:NixOS"
 end
+if platform.is_mac then
+	config.front_end = "WebGpu"
+end
 
 return config

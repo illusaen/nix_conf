@@ -2,7 +2,7 @@
   pkgs,
   USER,
   config,
-  isDarwin,
+  IS_DARWIN,
   ...
 }:
 
@@ -15,7 +15,7 @@ in
       ''
         fish_add_path --append "$HOME/.local/bin"
       ''
-      + (if !isDarwin then wslCommands else "");
+      + (if !IS_DARWIN then wslCommands else "");
 
     enable = true;
 

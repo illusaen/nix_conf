@@ -7,7 +7,7 @@
   ...
 }:
 let
-  isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
+  IS_DARWIN = pkgs.stdenv.hostPlatform.isDarwin;
 in
 {
   home-manager = {
@@ -20,7 +20,7 @@ in
         HOME
         HOST
         HM_MODULE_DIR
-        isDarwin
+        IS_DARWIN
         ;
     };
   };

@@ -29,7 +29,9 @@
     }@inputs:
     let
       USER = "wendy";
-      CONFIG_DIR = "nix_conf";
+      configDir = "nix_conf";
+      homeLinux = "/home/${USER}";
+      homeMac = "/Users/${USER}";
       inherit (self) outputs;
 
       forEachSystem =
@@ -65,11 +67,11 @@
             home-manager
             outputs
             USER
-            CONFIG_DIR
             ;
           HOST = "idunn";
-          HOME = "/Users/${USER}";
-          HM_MODULE_DIR = "/home/${USER}/${CONFIG_DIR}/home-manager/modules";
+          HOME = homeMac;
+          CONFIG_DIR = "${homeMac}/${configDir}";
+          HM_MODULE_DIR = "${homeMac}/${configDir}/home-manager/modules";
         }
       );
 
@@ -81,11 +83,11 @@
             nixos-wsl
             home-manager
             USER
-            CONFIG_DIR
             ;
           HOST = "loki";
-          HOME = "/home/${USER}";
-          HM_MODULE_DIR = "/home/${USER}/${CONFIG_DIR}/home-manager/modules";
+          HOME = homeLinux;
+          CONFIG_DIR = "${homeLinux}/${configDir}";
+          HM_MODULE_DIR = "${homeLinux}/${configDir}/home-manager/modules";
         }
       );
 

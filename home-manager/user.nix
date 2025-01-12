@@ -1,6 +1,6 @@
 {
   config,
-  isDarwin,
+  IS_DARWIN,
   USER,
   HOME,
   HM_MODULE_DIR,
@@ -20,7 +20,7 @@ let
   ];
 in
 {
-  imports = shared-modules ++ (if isDarwin then [ darwin-file ] else [ wsl-file ]);
+  imports = shared-modules ++ (if IS_DARWIN then [ darwin-file ] else [ wsl-file ]);
 
   nixpkgs = {
     config = {
