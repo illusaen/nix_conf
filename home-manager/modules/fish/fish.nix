@@ -1,28 +1,19 @@
 {
   pkgs,
-  USER,
   config,
-  IS_DARWIN,
   ...
 }:
 
-let
-  wslCommands = ''fish_add_path --append "/mnt/c/Users/${USER}/AppData/Local/Microsoft/WinGet/Packages/equalsraf.win32yank_Microsoft.Winget.Source_8wekyb3d8bbwe"'';
-in
 {
   programs.fish = {
-    interactiveShellInit =
-      ''
-        fish_add_path --append "$HOME/.local/bin"
-      ''
-      + (if !IS_DARWIN then wslCommands else "");
-
     enable = true;
 
     shellAbbrs = {
       cd = "j";
       cdd = "builtin cd";
       ga = "git add";
+      gal = "git add .";
+      gg = "git pull";
       gd = "git diff";
       gco = "git checkout";
       gcl = "git clone";

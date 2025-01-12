@@ -41,6 +41,9 @@ in
       NIX_CONF = "$HOME/nix_conf";
       fzf_preview_dir_cmd = "eza --all --color=always";
     };
+    sessionPath = [
+      "${HOME}/.local/bin/scripts"
+    ];
   };
 
   home.file.".local/bin/scripts" = {

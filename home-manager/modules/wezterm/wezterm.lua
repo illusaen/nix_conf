@@ -14,6 +14,18 @@ local function _platform()
 end
 local platform = _platform()
 
+config.skip_close_confirmation_for_processes_named = {
+	"bash",
+	"sh",
+	"zsh",
+	"fish",
+	"tmux",
+	"zellij",
+	"nu",
+	"cmd.exe",
+	"pwsh.exe",
+	"powershell.exe",
+}
 config.font = wezterm.font("JetBrainsMono Nerd Font")
 config.font_size = platform.is_mac and 12 or 9
 config.color_scheme = "Ayu Mirage"
@@ -21,7 +33,6 @@ config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = true
 config.initial_cols = 128
 config.initial_rows = 80
-config.window_close_confirmation = "NeverPrompt"
 if platform.is_win then
 	config.default_domain = "WSL:NixOS"
 end
