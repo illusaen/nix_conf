@@ -30,19 +30,16 @@ in
           if [ ! -f "$settingsSource" ]; then
             echo "$settingsSource does not exist."
           fi
-          # if [ -e "$settingsDestination" ]; then
-            rm "$settingsDestination"
-          # fi
+          rm "$settingsDestination"
           ln -s "$settingsSource" "$settingsDestination"
           echo "Symlinked $settingsSource to $settingsDestination"
+
           extensionsSource="${HOME}/.openvscode-server/extensions"
           extensionsDestination="${HOME}/.vscode-server/extensions"
-          if [ ! -f "$extensionsSource" ]; then
+          if [ ! -d "$extensionsSource" ]; then
             echo "$extensionsSource does not exist."
           fi
-          # if [ -e "$extensionsDestination" ]; then
-            rm -rf "$extensionsDestination"
-          # fi
+          rm -rf "$extensionsDestination"
           ln -s "$extensionsSource" "$extensionsDestination"
           echo "Symlinked $extensionsSource to $extensionsDestination"
         '';

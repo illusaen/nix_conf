@@ -12,7 +12,7 @@
 }:
 
 let
-  system = "x86_64-linux";
+  system = "aarch64-darwin";
   pkgs = import nixpkgs { inherit system; };
 in
 {
@@ -20,7 +20,7 @@ in
     modules = [
       {
         system.configurationRevision = outputs.rev or outputs.dirtyRev or null;
-        nixpkgs.hostPlatform = "aarch64-darwin";
+        nixpkgs.hostPlatform = system;
         system.stateVersion = 5;
 
         fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono ];

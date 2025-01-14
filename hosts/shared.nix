@@ -22,6 +22,7 @@
     automatic = true;
     options = "--delete-older-than 7d";
   };
+  nix.channel.enable = false;
   nixpkgs.config.allowUnfree = true;
 
   networking.hostName = HOST;
