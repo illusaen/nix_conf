@@ -15,6 +15,7 @@ end
 local platform = _platform()
 
 config.skip_close_confirmation_for_processes_named = {
+	"code",
 	"bash",
 	"sh",
 	"zsh",

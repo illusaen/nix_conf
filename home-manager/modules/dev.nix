@@ -108,7 +108,8 @@ in
         tauri-apps.tauri-vscode
         bradlc.vscode-tailwindcss
         rust-lang.rust-analyzer
-        # plugins.ibecker.treefmt-vscode
+        plugins.ibecker.treefmt-vscode
+        plugins.oven.bun-vscode
       ];
     };
   };
