@@ -104,7 +104,15 @@
         name = "fishplugin-fzf.fish";
         src = pkgs.fishPlugins.fzf-fish.src;
       }
+      {
+        name = "fishplugin-autols.fish";
+        src = pkgs.fetchFromGitHub {
+          owner = "kpbaks";
+          repo = "autols.fish";
+          rev = "fe2693e80558550e0d995856332b280eb86fde19";
+          sha256 = "EPgvY8gozMzai0qeDH2dvB4tVvzVqfEtPewgXH6SPGs=";
+        };
+      }
     ];
   };
-
 }

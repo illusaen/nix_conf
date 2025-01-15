@@ -30,7 +30,6 @@ in
 
   home = {
     sessionVariables = {
-      EDITOR = "hx";
       NIX_CONF = "$HOME/nix_conf";
       fzf_preview_dir_cmd = "eza --all --color=always";
     };

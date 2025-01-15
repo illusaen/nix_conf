@@ -7,11 +7,62 @@ let
   };
 in
 {
-  home.packages = [ pkgs.lunarvim ];
   programs = {
     helix = {
       enable = true;
       defaultEditor = true;
+      settings = {
+        theme = "gruvbox_dark_hard";
+        editor = {
+          rulers = [ 120 ];
+          color-modes = true;
+          text-width = 120;
+          indent-guides.render = true;
+          statusline.center = [ "mode" ];
+          whitespace.render.tab = "all";
+          end-of-line-diagnostics = "hint";
+          inline-diagnostics.cursor-line = "warning";
+          inline-diagnostics.other-lines = "info";
+          auto-save = {
+            focus-lost = true;
+            after-delay.enable = true;
+          };
+        };
+        keys.insert = {
+          j.k = "normal_mode";
+          "C-s" = [
+            "normal_mode"
+            ":w"
+            "insert_mode"
+          ];
+        };
+        keys.normal = {
+          "C-s" = ":w";
+          g.a = "code_action";
+          "ret" = [
+            "open_below"
+            "normal_mode"
+          ];
+        };
+      };
+      languages = {
+        language-server.rust-analyzer = {
+          config = {
+            checkOnSave.command = "clippy";
+            cargo.allFeatures = true;
+          };
+        };
+        language = [
+          {
+            name = "rust";
+            auto-format = true;
+          }
+          {
+            name = "python";
+            auto-format = true;
+          }
+        ];
+      };
     };
     vscode = {
       enable = true;
