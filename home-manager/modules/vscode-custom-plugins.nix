@@ -9,7 +9,7 @@ let
     isAarch32
     isAarch64
     ;
-  vscode-utils = pkgs.vscode-utils;
+  extension = pkgs.vscode-utils.extensionFromVscodeMarketplace;
   merge = lib.attrsets.recursiveUpdate;
 in
 merge
@@ -17,16 +17,22 @@ merge
     (merge
       (merge
         {
-          "oven"."bun-vscode" = vscode-utils.extensionFromVscodeMarketplace {
+          "oven"."bun-vscode" = extension {
             name = "bun-vscode";
             publisher = "oven";
             version = "0.0.26";
             sha256 = "13ml1zk8g5g56c74acq9xrhndyj1s1k1ayadlgv9hn1b18l28lwj";
           };
+          "monokai"."theme-monokai-pro-vscode" = extension {
+            name = "theme-monokai-pro-vscode";
+            publisher = "monokai";
+            version = "2.0.6";
+            sha256 = "022iba1nby44bfwg4hn7vq8s9z1lp7cl075yx2br5bsp6fq5yghg";
+          };
         }
         (
           lib.attrsets.optionalAttrs (isLinux && (isi686 || isx86_64)) {
-            "ibecker"."treefmt-vscode" = vscode-utils.extensionFromVscodeMarketplace {
+            "ibecker"."treefmt-vscode" = extension {
               name = "treefmt-vscode";
               publisher = "ibecker";
               version = "2.1.1";
@@ -38,7 +44,7 @@ merge
       )
       (
         lib.attrsets.optionalAttrs (isLinux && (isAarch32 || isAarch64)) {
-          "ibecker"."treefmt-vscode" = vscode-utils.extensionFromVscodeMarketplace {
+          "ibecker"."treefmt-vscode" = extension {
             name = "treefmt-vscode";
             publisher = "ibecker";
             version = "2.1.1";
@@ -50,7 +56,7 @@ merge
     )
     (
       lib.attrsets.optionalAttrs (isDarwin && (isi686 || isx86_64)) {
-        "ibecker"."treefmt-vscode" = vscode-utils.extensionFromVscodeMarketplace {
+        "ibecker"."treefmt-vscode" = extension {
           name = "treefmt-vscode";
           publisher = "ibecker";
           version = "2.1.1";
@@ -62,7 +68,7 @@ merge
   )
   (
     lib.attrsets.optionalAttrs (isDarwin && (isAarch32 || isAarch64)) {
-      "ibecker"."treefmt-vscode" = vscode-utils.extensionFromVscodeMarketplace {
+      "ibecker"."treefmt-vscode" = extension {
         name = "treefmt-vscode";
         publisher = "ibecker";
         version = "2.1.1";

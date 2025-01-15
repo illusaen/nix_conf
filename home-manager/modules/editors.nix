@@ -29,7 +29,7 @@ in
         "nix.serverPath" = "nixd";
         "editor.minimap.enabled" = false;
         "terminal.integrated.defaultProfile.osx" = "fish";
-        "workbench.colorTheme" = "Ayu Mirage";
+        "workbench.colorTheme" = "Monokai Pro";
         "workbench.startupEditor" = "none";
         "svelte.enable-ts-plugin" = true;
         "files.associations" = {
@@ -38,7 +38,10 @@ in
         "editor.quickSuggestions" = {
           "strings" = "on";
         };
-        "git.autoFetch" = true;
+        "git.autofetch" = true;
+        "github.copilot.chat.completionContext.typescript.mode" = "on";
+        "github.copilot.chat.temporalContext.enabled" = true;
+        "github.copilot.chat.generateTests.codeLens" = true;
       };
       extensions = with pkgs.vscode-extensions; [
         dbaeumer.vscode-eslint
@@ -57,6 +60,7 @@ in
         rust-lang.rust-analyzer
         plugins.ibecker.treefmt-vscode
         plugins.oven.bun-vscode
+        plugins.monokai.theme-monokai-pro-vscode
       ];
     };
   };
