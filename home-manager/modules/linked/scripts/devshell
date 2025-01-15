@@ -11,9 +11,9 @@ if [ -f flake.nix ]; then
   exit 0
 fi
 
-NAME=$1
+NAME="$1"
 echo "Initializing devshell for $NAME."
-nix flake init --quiet --template $NIX_CONF#$NAME
+nix flake init --quiet --template "$NIX_CONF#$NAME"
 
 if [ $? -ne 0 ]; then
   echo "Flake initialization failed!"

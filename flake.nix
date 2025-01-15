@@ -55,7 +55,7 @@
             )
           ))
           (name: {
-            path = ./templates/name;
+            path = ./templates/${name};
             description = "Template for " + name;
           });
     in
