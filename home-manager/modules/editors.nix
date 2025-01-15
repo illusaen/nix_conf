@@ -38,6 +38,7 @@ in
         "editor.quickSuggestions" = {
           "strings" = "on";
         };
+        "git.autoFetch" = true;
       };
       extensions = with pkgs.vscode-extensions; [
         dbaeumer.vscode-eslint
