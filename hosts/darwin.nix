@@ -34,7 +34,22 @@ in
       ./darwin-1password.nix
       home-manager.darwinModules.home-manager
       {
-        imports = [ ../home-manager/home.nix ];
+        imports = [
+          ../home-manager/home.nix
+        ];
+        home-manager.users."${USER}" = {
+          home.packages = with pkgs; [
+            raycast
+            google-chrome
+          ];
+          programs = {
+            fish.shellAbbrs = {
+              nrn = "cd $NIX_CONF; git add .; darwin-rebuild switch --flake $NIX_CONF; cd -";
+            };
+            wezterm.enable = true;
+            vscode.package = pkgs.vscode;
+          };
+        };
       }
     ];
     specialArgs = {

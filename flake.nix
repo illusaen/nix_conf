@@ -32,7 +32,6 @@
       configDir = "nix_conf";
       homeLinux = "/home/${USER}";
       homeMac = "/Users/${USER}";
-      inherit (self) outputs;
 
       forEachSystem =
         f:
@@ -79,7 +78,6 @@
             nixpkgs
             nix-darwin
             home-manager
-            outputs
             USER
             ;
           HOST = "idunn";
