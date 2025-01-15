@@ -9,27 +9,6 @@
 let
   user = config.home.username;
   home = config.home.homeDirectory;
-  copyFile = ''
-    shouldCopy = "$1"
-    source="$2"
-    destination="$3"
-    if [ ! -f "$source" ] || [ -d "$source" ]; then
-      echo "$source does not exist."
-    fi
-    if [ -f "$destination" ]; then
-      rm "$destination"
-    fi
-    if [ -d "$destination" ]; then
-      rm -rf "$destination"
-    fi
-    if [ "$shouldCopy" -eq 1 ]; then
-      cp "$source" "$destination"
-      echo "Copied $source to $destination"
-    else
-      ln -s "$source" "$destination"
-      echo "Symlinked $source to $destination"
-    fi
-  '';
 in
 {
   programs = {
