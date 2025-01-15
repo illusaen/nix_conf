@@ -5,7 +5,6 @@
   USER,
   HOST,
   HOME,
-  CONFIG_DIR,
   HM_MODULE_DIR,
   ...
 }:
@@ -19,7 +18,6 @@ in
       inherit
         USER
         HOME
-        CONFIG_DIR
         HOST
         HM_MODULE_DIR
         ;
@@ -28,8 +26,6 @@ in
       {
         nix.registry.nixpkgs.flake = nixpkgs;
         nixpkgs.hostPlatform.system = system;
-        programs._wezterm.enable = true;
-        programs._vscode.enable = true;
       }
       nixos-wsl.nixosModules.default
       {
@@ -42,8 +38,6 @@ in
         };
       }
       ./shared.nix
-      ./wsl-wezterm.nix
-      ./wsl-vscode.nix
       home-manager.nixosModules.home-manager
       {
         imports = [ ../home-manager/home.nix ];

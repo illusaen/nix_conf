@@ -33,7 +33,8 @@ config.color_scheme = "Ayu Mirage"
 config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = true
 config.initial_cols = 128
-config.initial_rows = 80
+config.initial_rows = 64
+config.window_close_confirmation = "NeverPrompt"
 if platform.is_win then
 	config.default_domain = "WSL:NixOS"
 end

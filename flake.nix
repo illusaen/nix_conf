@@ -44,6 +44,20 @@
             };
           }
         );
+
+      attrs = nixpkgs.lib.attrsets;
+      listTemplateDirectory =
+        path:
+        attrs.genAttrs
+          (builtins.attrNames (
+            attrs.filterAttrs (n: v: v == "directory") (
+              builtins.removeAttrs (builtins.readDir path) [ "shared" ]
+            )
+          ))
+          (name: {
+            path = ./templates/name;
+            description = "Template for " + name;
+          });
     in
     {
       devShells = forEachSystem (
@@ -70,7 +84,6 @@
             ;
           HOST = "idunn";
           HOME = homeMac;
-          CONFIG_DIR = "${homeMac}/${configDir}";
           HM_MODULE_DIR = "${homeMac}/${configDir}/home-manager/modules";
         }
       );
@@ -86,28 +99,10 @@
             ;
           HOST = "loki";
           HOME = homeLinux;
-          CONFIG_DIR = "${homeLinux}/${configDir}";
           HM_MODULE_DIR = "${homeLinux}/${configDir}/home-manager/modules";
         }
       );
 
-      templates = {
-        node = {
-          path = ./templates/node;
-          description = "JS/TS with PNPM and direnv";
-        };
-        rust = {
-          path = ./templates/rust;
-          description = "Rust with cargo and direnv";
-        };
-        python = {
-          path = ./templates/python;
-          description = "Python with venvshellhook";
-        };
-        go = {
-          path = ./templates/go;
-          description = "Go with gotools and direnv";
-        };
-      };
+      templates = listTemplateDirectory ./templates;
     };
 }

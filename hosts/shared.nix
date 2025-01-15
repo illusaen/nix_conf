@@ -18,10 +18,13 @@
     USER
     "@wheel"
   ];
+  nix.settings.auto-optimise-store = true;
+
   nix.gc = {
     automatic = true;
     options = "--delete-older-than 7d";
   };
+
   nix.channel.enable = false;
   nixpkgs.config.allowUnfree = true;
 

@@ -1,8 +1,6 @@
 {
   pkgs,
   USER,
-  HOME,
-  HOST,
   HM_MODULE_DIR,
   ...
 }:
@@ -16,9 +14,6 @@ in
     users."${USER}" = import ./user.nix;
     extraSpecialArgs = {
       inherit
-        USER
-        HOME
-        HOST
         HM_MODULE_DIR
         IS_DARWIN
         ;

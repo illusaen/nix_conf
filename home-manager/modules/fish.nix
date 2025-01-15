@@ -1,6 +1,5 @@
 {
   pkgs,
-  config,
   ...
 }:
 
@@ -80,9 +79,4 @@
     ];
   };
 
-  xdg.configFile."fish/conf.d/autols.fish".source = ./autols.fish;
-  xdg.configFile."fish/functions/get_directory_names.fish".source =
-    config.lib.file.mkOutOfStoreSymlink ./get_directory_names.fish;
-  xdg.configFile."fish/functions/create_development_shell.fish".source =
-    config.lib.file.mkOutOfStoreSymlink ./create_development_shell.fish;
 }

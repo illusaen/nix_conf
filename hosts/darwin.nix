@@ -6,7 +6,6 @@
   USER,
   HOST,
   HOME,
-  CONFIG_DIR,
   HM_MODULE_DIR,
   ...
 }:
@@ -43,7 +42,6 @@ in
         USER
         HOST
         HOME
-        CONFIG_DIR
         HM_MODULE_DIR
         ;
     };
